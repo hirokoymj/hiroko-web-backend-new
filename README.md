@@ -25,104 +25,6 @@ mongodb://localhost:27017/mydb
 - `introspection` and the `playground` can be enabled explicitly in the following manner.
 - [Apollo Server Official Doc: GraphQL Playground](https://www.apollographql.com/docs/apollo-server/testing/graphql-playground/#gatsby-focus-wrapper)
 
-### Manual deploy in heroku
-
-- Add a remote to your local repository with the heroku `git:remote`
-
-```js
-% heroku git:remote -a hirokoymj-backend
- ›   Warning: heroku update available from 7.59.2 to 7.60.1.
-set git remote heroku to https://git.heroku.com/hirokoymj-backend.git
-```
-
-```js
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-  introspection: true, // enabled!!
-  playground: true, // enabled!!
-});
-```
-
-<hr />
-
-## Run local
-
-```js
-npm run dev
-```
-
-### Testing some queries and mutations
-
-**RegisteredUser**
-
-```js
-mutation RegisterUser {
-  registerUser(registerInput: {username: "test", email: "test@test.com", password: "test"}) {
-     username
-     email
-     password
-  }
-}
-
-{
-  "data": {
-    "registerUser": {
-      "username": "test",
-      "email": "test@test.com",
-      "password": "$2a$10$jWLsWh7TNYrPszogbEwole.MH.EPZv4d8x.sfLmDz27n0eEifonke"
-    }
-  }
-}
-```
-
-**User Query**
-
-```js
-query GETUSER{
-  user(id: "625b8f06a3426c0cc489723c"){
-    username
-    email
-    token
-    password
-  }
-}
-{
-  "data": {
-    "user": {
-      "username": "test",
-      "email": "test@test.com",
-      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjI1YjhmMDZhMzQyNmMwY2M0ODk3MjNjIiwiZW1haWwiOiJ0ZXN0QHRlc3QuY29tIiwiaWF0IjoxNjUwMTY3NTU4LCJleHAiOjE2NTAxNzQ3NTh9.9iHCXDIYZly6a0e00mbUxP3W-zq8saetuy-QV7fzQ9o",
-      "password": "$2a$10$jWLsWh7TNYrPszogbEwole.MH.EPZv4d8x.sfLmDz27n0eEifonke"
-    }
-  }
-}
-```
-
-**LoginUser mutation**
-
-```js
-mutation LOGINUSER{
-	loginUser(loginInput: {email: "test@test.com", password: "test"}){
-    username
-    email
-    password
-    token
-  }
-}
-
-{
-  "data": {
-    "loginUser": {
-      "username": "test",
-      "email": "test@test.com",
-      "password": "$2a$10$jWLsWh7TNYrPszogbEwole.MH.EPZv4d8x.sfLmDz27n0eEifonke",
-      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjI1YjhmMDZhMzQyNmMwY2M0ODk3MjNjIiwiZW1haWwiOiJ0ZXN0QHRlc3QuY29tIiwiaWF0IjoxNjUwMjQzNjg1LCJleHAiOjE2NTAyNTA4ODV9.NOfe1Vd7FzfbofbGc3RnOT8faiVDG19_XhUHoJre1nM"
-    }
-  }
-}
-```
-
 ## References:
 
 **graphql-tools**
@@ -133,5 +35,8 @@ mutation LOGINUSER{
 **Apollo Server Instance Options**
 
 - https://www.apollographql.com/docs/apollo-server/api/apollo-server/
-
 - [Heroku: Deploying with Git](https://devcenter.heroku.com/articles/git#create-a-heroku-remote)
+
+## History
+
+- 01.14.2024 - Upgraded Apollo Server version 2 to 3.

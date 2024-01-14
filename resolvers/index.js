@@ -5,7 +5,6 @@ const subCategoryResolver = require("./subCategory");
 const topicResolver = require("./topic");
 const weatherResolver = require("./weather");
 const cityResolver = require("./city");
-const userResolver = require("./user");
 
 const dateScalar = new GraphQLScalarType({
   name: "Date",
@@ -35,5 +34,4 @@ module.exports = [
   topicResolver,
   weatherResolver,
   cityResolver,
-  userResolver,
 ];
