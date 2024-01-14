@@ -1,6 +1,6 @@
 # GraphQL API for hirokoymj.com
 
-- Production URL: xxx
+- Production URL: https://hiroko-web-backend-new-08d39ee2590b.herokuapp.com/
 - Localhost URL:http://localhost:4000/
 - MongoDB Local: mongodb://localhost:27017/mydb
 - MongoDB Atlas: https://account.mongodb.com/account/login?nds=true

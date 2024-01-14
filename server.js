@@ -1,5 +1,9 @@
 import { ApolloServer } from "apollo-server";
-import { ApolloServerPluginLandingPageLocalDefault } from "apollo-server-core";
+import {
+  ApolloServerPluginLandingPageLocalDefault,
+  ApolloServerPluginLandingPageProductionDefault,
+  ApolloServerPluginLandingPageGraphQLPlayground,
+} from "apollo-server-core";
 import { makeExecutableSchema } from "@graphql-tools/schema";
 import dotEnv from "dotenv";
 
@@ -51,7 +55,13 @@ const schema = makeExecutableSchema({
   csrfPrevention: true,
   cache: "bounded",
   introspection: true,
-  plugins: [ApolloServerPluginLandingPageLocalDefault({ embed: true })],
+  plugins: [
+    process.env.NODE_ENV === "production"
+      ? ApolloServerPluginLandingPageGraphQLPlayground({
+          footer: false,
+        })
+      : ApolloServerPluginLandingPageLocalDefault({ footer: false }),
+  ],
 });
 
 const apolloServer = new ApolloServer({
