@@ -29,6 +29,7 @@ const apolloServer = new ApolloServer({
   resolvers,
   csrfPrevention: true,
   cache: "bounded",
+  introspection: true,
   plugins: [ApolloServerPluginLandingPageLocalDefault({ embed: true })],
 });
 
