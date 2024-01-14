@@ -36,7 +36,10 @@ mongodb://localhost:27017/mydb
 
 - https://www.apollographql.com/docs/apollo-server/api/apollo-server/
 - [Heroku: Deploying with Git](https://devcenter.heroku.com/articles/git#create-a-heroku-remote)
+- https://stackoverflow.com/questions/76594556/receive-dep0170-when-connecting-mongodb-atlas-with-node-js-20-3-1
+-
 
 ## History
 
 - 01.14.2024 - Upgraded Apollo Server version 2 to 3.
+-
