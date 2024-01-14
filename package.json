@@ -5,6 +5,7 @@
     "node": "20.x"
   },
   "description": "",
+  "type": "module",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -13,13 +14,14 @@
   "author": "Hiroko Y.",
   "license": "ISC",
   "dependencies": {
-    "apollo-datasource-rest": "^3.7.0",
+    "@apollo/datasource-rest": "^6.2.2",
+    "@graphql-tools/schema": "^10.0.2",
     "apollo-server": "^3.13.0",
     "apollo-server-errors": "^3.3.1",
     "dotenv": "^8.2.0",
     "graphql": "^16.8.1",
     "lodash": "^4.17.20",
-    "mongoose": "^5.10.8"
+    "mongoose": "^8.0.4"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"

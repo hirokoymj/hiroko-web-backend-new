@@ -1,8 +1,8 @@
-const { RESTDataSource } = require("apollo-datasource-rest");
-const get = require("lodash/get");
-const map = require("lodash/map");
+import { RESTDataSource } from "@apollo/datasource-rest";
+import get from "lodash";
+import map from "lodash";
 
-class WeatherAPI extends RESTDataSource {
+export class WeatherAPI extends RESTDataSource {
   constructor() {
     super();
     this.baseURL = "https://api.openweathermap.org/";
@@ -87,7 +87,6 @@ class WeatherAPI extends RESTDataSource {
     };
   }
 }
-module.exports = WeatherAPI;
 
 // TEST URL - Current Weather
 // https://api.openweathermap.org/data/2.5/weather?q=tokyo&units=metric&appid=be2d43efb7b89c5d69256d7ec44da9b8

@@ -1,6 +1,4 @@
-const { gql } = require("apollo-server");
-
-module.exports = gql`
+export const typeDef = /* GraphQL */ `
   extend type Query {
     categories(limit: Int, cursor: String, filter: [String]): CategoryFeed!
     categoryById(id: ID!): Category!
@@ -12,7 +10,6 @@ module.exports = gql`
     updateCategory(id: ID!, input: updateCategoryInput!): Category
     deleteCategory(id: ID!): Category
   }
-
   type Category {
     id: ID!
     name: String!

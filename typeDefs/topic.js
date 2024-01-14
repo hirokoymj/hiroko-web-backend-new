@@ -1,6 +1,4 @@
-const { gql } = require("apollo-server");
-
-module.exports = gql`
+export const typeDef = /* GraphQL */ `
   extend type Query {
     topics(limit: Int, cursor: String, filter: [String]): TopicFeed!
     topicById(id: ID!): Topic!

@@ -1,7 +1,7 @@
-const Category = require("../database/models/category");
-const SubCategory = require("../database/models/subCategory");
+import { Category } from "../database/models/category.js";
+import { SubCategory } from "../database/models/subCategory.js";
 
-module.exports = {
+export const subCategoryResolvers = {
   Query: {
     subCategories: async (_, { cursor, limit = 10, filter }) => {
       try {

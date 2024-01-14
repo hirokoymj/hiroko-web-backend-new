@@ -1,36 +1,61 @@
-const { ApolloServer, gql } = require("apollo-server");
-const dotEnv = require("dotenv");
+import { ApolloServer } from "apollo-server";
+import { ApolloServerPluginLandingPageLocalDefault } from "apollo-server-core";
+import { makeExecutableSchema } from "@graphql-tools/schema";
+import dotEnv from "dotenv";
 
-const resolvers = require("./resolvers");
-const typeDefs = require("./typeDefs");
-const { connection } = require("./database/util");
-const WeatherAPI = require("./datasources/weather");
-const {
-  ApolloServerPluginLandingPageLocalDefault,
-} = require("apollo-server-core");
+import { connection } from "./database/util/index.js";
+import { typeDef as Category } from "./typeDefs/category.js";
+import { typeDef as SubCategory } from "./typeDefs/subCategory.js";
+import { typeDef as Topic } from "./typeDefs/topic.js";
+import { typeDef as Weather } from "./typeDefs/weather.js";
+import { typeDef as City } from "./typeDefs/city.js";
+import { WeatherAPI } from "./datasources/weather.js";
+import { categoryResolvers } from "./resolvers/category.js";
+import { subCategoryResolvers } from "./resolvers/subCategory.js";
+import { topicResolvers } from "./resolvers/topic.js";
+import { dateScalarResolver } from "./resolvers/dateScaler.js";
+import { weatherResolvers } from "./resolvers/weather.js";
+import { cityResolvers } from "./resolvers/city.js";
 
-// set env variables
 dotEnv.config();
 
 connection();
 
-// const apolloServer = new ApolloServer({
-//   typeDefs,
-//   resolvers,
-//   dataSources: () => ({
-//     weatherAPI: new WeatherAPI(),
-//   }),
-//   introspection: true,
-//   playground: true,
-// });
+const Query = /* GraphQL */ `
+  scalar Date
+  type Query {
+    _: String
+  }
+  type Mutation {
+    _: String
+  }
+  type PageInfo {
+    endCursor: String
+    hasNextPage: Boolean
+  }
+`;
 
-const apolloServer = new ApolloServer({
-  typeDefs,
-  resolvers,
+const schema = makeExecutableSchema({
+  typeDefs: [Query, Category, SubCategory, Topic, Weather, City],
+  resolvers: [
+    dateScalarResolver,
+    categoryResolvers,
+    subCategoryResolvers,
+    topicResolvers,
+    weatherResolvers,
+    cityResolvers,
+  ],
+  dataSources: () => ({
+    weatherAPI: new WeatherAPI(),
+  }),
   csrfPrevention: true,
   cache: "bounded",
   introspection: true,
   plugins: [ApolloServerPluginLandingPageLocalDefault({ embed: true })],
+});
+
+const apolloServer = new ApolloServer({
+  schema,
 });
 
 apolloServer.listen({ port: process.env.PORT || 4000 }).then(({ url }) => {

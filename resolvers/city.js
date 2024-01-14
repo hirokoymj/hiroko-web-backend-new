@@ -1,6 +1,6 @@
-const City = require("../database/models/city");
+import { City } from "../database/models/city.js";
 
-module.exports = {
+export const cityResolvers = {
   Query: {
     cities: async (_, { city }) => {
       console.log("cities");

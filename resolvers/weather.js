@@ -1,4 +1,4 @@
-module.exports = {
+export const weatherResolvers = {
   Query: {
     currentWeatherByCity: (_, { city, unit = "metric" }, { dataSources }) =>
       dataSources.weatherAPI.getCurrentWeatherByCity(city, unit),

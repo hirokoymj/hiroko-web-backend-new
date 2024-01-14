@@ -1,6 +1,6 @@
-const Category = require("../database/models/category");
+import { Category } from "../database/models/category.js";
 
-module.exports = {
+export const categoryResolvers = {
   Query: {
     categories: async (_, { cursor, limit = 10, filter }) => {
       try {

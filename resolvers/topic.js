@@ -1,8 +1,8 @@
-const Category = require("../database/models/category");
-const SubCategory = require("../database/models/subCategory");
-const Topic = require("../database/models/topic");
+import { Category } from "../database/models/category.js";
+import { SubCategory } from "../database/models/subCategory.js";
+import { Topic } from "../database/models/topic.js";
 
-module.exports = {
+export const topicResolvers = {
   Query: {
     topics: async (_, { cursor, limit = 10, filter }) => {
       try {

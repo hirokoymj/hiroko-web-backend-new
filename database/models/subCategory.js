@@ -1,4 +1,4 @@
-const { model, Schema } = require("mongoose");
+import { Schema, model } from "mongoose";
 
 const subCategorySchema = new Schema(
   {
@@ -20,4 +20,4 @@ const subCategorySchema = new Schema(
   }
 );
 
-module.exports = model("SubCategory", subCategorySchema);
+export const SubCategory = model("SubCategory", subCategorySchema);

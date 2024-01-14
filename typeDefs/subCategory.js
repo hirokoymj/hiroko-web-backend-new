@@ -1,6 +1,4 @@
-const { gql } = require("apollo-server");
-
-module.exports = gql`
+export const typeDef = /* GraphQL */ `
   extend type Query {
     subCategories(
       limit: Int

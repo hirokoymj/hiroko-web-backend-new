@@ -1,4 +1,4 @@
-const { model, Schema } = require("mongoose");
+import { model, Schema } from "mongoose";
 
 const citySchema = new Schema({
   id: {
@@ -27,4 +27,4 @@ const citySchema = new Schema({
   },
 });
 
-module.exports = model("City", citySchema);
+export const City = model("City", citySchema);
