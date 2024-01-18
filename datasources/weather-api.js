@@ -1,8 +1,9 @@
-import { RESTDataSource } from "@apollo/datasource-rest";
-import get from "lodash";
-import map from "lodash";
+import { RESTDataSource } from "apollo-datasource-rest";
+import get from "lodash/get.js";
+import map from "lodash/map.js";
 
-export class WeatherAPI extends RESTDataSource {
+console.log("Weather API");
+export default class WeatherAPI extends RESTDataSource {
   constructor() {
     super();
     this.baseURL = "https://api.openweathermap.org/";
@@ -10,9 +11,11 @@ export class WeatherAPI extends RESTDataSource {
   }
 
   async getCurrentWeatherByCity(city, unit) {
+    console.log("getCurrentWeatherByCity");
     const response = await this.get(
       `data/2.5/weather?q=${city}&units=${unit}&appid=${this.apiKey}`
     );
+    console.log(response);
 
     const id = get(response, "id"); // City Id
     const cityInfo = {
@@ -34,7 +37,7 @@ export class WeatherAPI extends RESTDataSource {
       feelsLike: get(response, "main.feels_like"),
       humidity: get(response, "main.humidity"),
     };
-
+    console.log(id);
     return {
       id,
       cityInfo,

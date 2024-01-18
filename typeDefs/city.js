@@ -1,4 +1,6 @@
-export const typeDef = /* GraphQL */ `
+import { gql } from "apollo-server";
+
+export const typeDef = gql`
   extend type Query {
     cities(city: String!): [City]
   }

@@ -32,6 +32,26 @@
 - [Why is 'type: module' in package.json file?](https://stackoverflow.com/questions/61401475/why-is-type-module-in-package-json-file)
 - [mongoose version8.0.4](https://mongoosejs.com/docs/connections.html#options)
 
+## GraphQL Playground
+
+- https://studio.apollographql.com/sandbox/explorer
+
+```
+query GetForcast($city: String!){
+ dailyForecast (city: $city){
+   id
+  cityInfo{
+    name
+    country
+  }
+ }
+}
+# Query variables
+{
+  "city": "tokyo"
+}
+```
+
 ## History
 
 | Date       | Description                          |
@@ -39,3 +59,10 @@
 | 01.14.2024 | Migrated Apollo Server v2 to v3.     |
 | 01.14.2024 | Added _type:module_ in package.json. |
 |            |                                      |
+
+```
+curl --request POST \
+  --header 'content-type: application/json' \
+  --url 'https://hiroko-web-backend-new-08d39ee2590b.herokuapp.com/' \
+  --data '{"query":"query GetCategory{categoryAll{id}}"}'
+```
