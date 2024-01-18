@@ -32,19 +32,51 @@
 - [Why is 'type: module' in package.json file?](https://stackoverflow.com/questions/61401475/why-is-type-module-in-package-json-file)
 - [mongoose version8.0.4](https://mongoosejs.com/docs/connections.html#options)
 
-## GraphQL Playground
+## Testing GraphQL queries
 
 - https://studio.apollographql.com/sandbox/explorer
 
 ```
-query GetForcast($city: String!){
- dailyForecast (city: $city){
-   id
-  cityInfo{
-    name
-    country
+query GetCat {
+  categoryAll {
+    id
   }
- }
+}
+```
+
+```
+query GetCat {
+  categories {
+    categoryFeed {
+      abbr
+    }
+  }
+}
+```
+
+- Test Query 2 (datasource REST API)
+
+```
+query GetForcast($city: String!){
+  dailyForecast (city: $city){
+    id
+    cityInfo{
+      name
+      country
+    }
+  }
+}
+# Query variables
+{
+  "city": "tokyo"
+}
+```
+
+```
+query GetWeather($city: String!){
+currentWeatherByCity (city: $city){
+  id
+}
 }
 # Query variables
 {
@@ -58,13 +90,7 @@ query GetForcast($city: String!){
 | ---------- | ------------------------------------ |
 | 01.14.2024 | Migrated Apollo Server v2 to v3.     |
 | 01.14.2024 | Added _type:module_ in package.json. |
-|            |                                      |
+| 01.18.2024 | Fixed datasource bug. Backed to use  |
 
-abc
-
-```
-curl --request POST \
-  --header 'content-type: application/json' \
-  --url 'https://hiroko-web-backend-new-08d39ee2590b.herokuapp.com/' \
-  --data '{"query":"query GetCategory{categoryAll{id}}"}'
-```
+- 01.18.2024 - Fixed datasource REST API bug. Since makeExecutableSchema() didnt't work datasource property, I backed to use original ApolloServer schema object as a parameter.
+- 01.18.2024 - Installed Typescript and @types/node. Converted all file extension from .js to .ts.

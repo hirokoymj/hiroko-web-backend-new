@@ -2,7 +2,6 @@ import { ApolloServer, gql } from "apollo-server";
 import {
   ApolloServerPluginLandingPageLocalDefault,
   ApolloServerPluginLandingPageProductionDefault,
-  ApolloServerPluginLandingPageGraphQLPlayground,
 } from "apollo-server-core";
 import dotEnv from "dotenv";
 
@@ -54,7 +53,7 @@ const server = new ApolloServer({
   plugins: [
     process.env.NODE_ENV === "production"
       ? ApolloServerPluginLandingPageProductionDefault({
-          embed: true,
+          footer: false,
         })
       : ApolloServerPluginLandingPageLocalDefault({ embed: true }),
   ],

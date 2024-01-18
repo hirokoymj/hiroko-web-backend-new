@@ -2,20 +2,18 @@ import { RESTDataSource } from "apollo-datasource-rest";
 import get from "lodash/get.js";
 import map from "lodash/map.js";
 
-console.log("Weather API");
+const apiKey = "be2d43efb7b89c5d69256d7ec44da9b8";
+
 export default class WeatherAPI extends RESTDataSource {
   constructor() {
     super();
     this.baseURL = "https://api.openweathermap.org/";
-    this.apiKey = "be2d43efb7b89c5d69256d7ec44da9b8";
   }
 
-  async getCurrentWeatherByCity(city, unit) {
-    console.log("getCurrentWeatherByCity");
+  async getCurrentWeather(city, unit) {
     const response = await this.get(
-      `data/2.5/weather?q=${city}&units=${unit}&appid=${this.apiKey}`
+      `data/2.5/weather?q=${city}&units=${unit}&appid=${apiKey}`
     );
-    console.log(response);
 
     const id = get(response, "id"); // City Id
     const cityInfo = {
@@ -37,7 +35,7 @@ export default class WeatherAPI extends RESTDataSource {
       feelsLike: get(response, "main.feels_like"),
       humidity: get(response, "main.humidity"),
     };
-    console.log(id);
+
     return {
       id,
       cityInfo,
@@ -48,7 +46,7 @@ export default class WeatherAPI extends RESTDataSource {
   async getDailyForecast(city, unit) {
     const days = 7;
     const response = await this.get(
-      `data/2.5/forecast/daily?q=${city}&units=${unit}&cnt=${days}&appid=${this.apiKey}`
+      `data/2.5/forecast/daily?q=${city}&units=${unit}&cnt=${days}&appid=${apiKey}`
     );
 
     const id = get(response, "city.id");
