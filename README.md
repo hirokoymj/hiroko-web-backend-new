@@ -60,6 +60,8 @@ query GetForcast($city: String!){
 | 01.14.2024 | Added _type:module_ in package.json. |
 |            |                                      |
 
+abc
+
 ```
 curl --request POST \
   --header 'content-type: application/json' \
