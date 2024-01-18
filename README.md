@@ -1,9 +1,10 @@
 # GraphQL API for hirokoymj.com
 
-- Production URL: https://hiroko-web-backend-new-08d39ee2590b.herokuapp.com/
-- Localhost URL:http://localhost:4000/
-- MongoDB Local: mongodb://localhost:27017/mydb
+- Production: https://hiroko-web-backend-new-08d39ee2590b.herokuapp.com/
+- Localhost: http://localhost:4000/
 - MongoDB Atlas: https://account.mongodb.com/account/login?nds=true
+- Technologies: Node.js, Apollo Server v3, Typescript, MongoDB/Mongoose, Weather API
+- Deployment platform: Heroku
 
 ## References:
 
@@ -15,22 +16,24 @@
 - [Migrating to Apollo Server 3](https://www.apollographql.com/docs/apollo-server/v3/migration)
 - [apollo-datasource-rest](https://www.npmjs.com/package/apollo-datasource-rest)
 - [@apollo/datasource-rest](https://www.npmjs.com/package/@apollo/datasource-rest)
-
-<hr />
+- [Apollo Server v4 Get started](https://www.apollographql.com/docs/apollo-server/getting-started)
 
 **graphql-tools**
 
 - [graphql-tools](https://the-guild.dev/graphql/tools/docs/introduction)
 - [Modularizing your GraphQL schema code](https://www.apollographql.com/blog/modularizing-your-graphql-schema-code)
 
-<hr />
+**Deployment**
+
+- [Heroku: Deploying with Git](https://devcenter.heroku.com/articles/git#create-a-heroku-remote)
+- https://stackoverflow.com/questions/70707931/heroku-sh-1-tsc-not-found
 
 **Miscellaneous**
 
-- [Heroku: Deploying with Git](https://devcenter.heroku.com/articles/git#create-a-heroku-remote)
 - [Receive DEP0170 when connecting MongoDB Atlas with Node.js 20.3.1](https://stackoverflow.com/questions/76594556/receive-dep0170-when-connecting-mongodb-atlas-with-node-js-20-3-1)
 - [Why is 'type: module' in package.json file?](https://stackoverflow.com/questions/61401475/why-is-type-module-in-package-json-file)
 - [mongoose version8.0.4](https://mongoosejs.com/docs/connections.html#options)
+- https://openweathermap.org/api
 
 ## Testing GraphQL queries
 

@@ -1,7 +1,8 @@
-import { ApolloServer, gql } from "apollo-server";
+import { ApolloServer } from "apollo-server";
 import { ApolloServerPluginLandingPageLocalDefault, ApolloServerPluginLandingPageProductionDefault, } from "apollo-server-core";
 import dotEnv from "dotenv";
 import { connection } from "./database/util/index.js";
+import { Query } from "./typeDefs/rootQuery.js";
 import { typeDef as Category } from "./typeDefs/category.js";
 import { typeDef as SubCategory } from "./typeDefs/subCategory.js";
 import { typeDef as Topic } from "./typeDefs/topic.js";
@@ -16,19 +17,19 @@ import { weatherResolvers } from "./resolvers/weather.js";
 import { cityResolvers } from "./resolvers/city.js";
 dotEnv.config();
 connection();
-const Query = gql `
-  scalar Date
-  type Query {
-    _: String
-  }
-  type Mutation {
-    _: String
-  }
-  type PageInfo {
-    endCursor: String
-    hasNextPage: Boolean
-  }
-`;
+// const Query = gql`
+//   scalar Date
+//   type Query {
+//     _: String
+//   }
+//   type Mutation {
+//     _: String
+//   }
+//   type PageInfo {
+//     endCursor: String
+//     hasNextPage: Boolean
+//   }
+// `;
 const server = new ApolloServer({
     typeDefs: [Query, Category, SubCategory, Topic, Weather, City],
     resolvers: [
