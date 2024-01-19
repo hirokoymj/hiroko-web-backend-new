@@ -3,8 +3,17 @@
 - Production: https://hiroko-web-backend-new-08d39ee2590b.herokuapp.com/
 - Localhost: http://localhost:4000/
 - MongoDB Atlas: https://account.mongodb.com/account/login?nds=true
-- Technologies: Node.js, Apollo Server v3, Typescript, MongoDB/Mongoose, Weather API
-- Deployment platform: Heroku
+
+## Technologies
+
+- Node.js, Apollo Server v3, Typescript, MongoDB/Mongoose, Weather API
+
+## Deployment platform
+
+- Heroku
+- Region: United States
+- Plan: Basic (Max of $7.00/month)
+- Features: Heroku CLI, Auto-deploy enabled
 
 ## References:
 
@@ -26,7 +35,7 @@
 **Deployment**
 
 - [Heroku: Deploying with Git](https://devcenter.heroku.com/articles/git#create-a-heroku-remote)
-- https://stackoverflow.com/questions/70707931/heroku-sh-1-tsc-not-found
+- [heroku sh: 1: tsc: not found](https://stackoverflow.com/questions/70707931/heroku-sh-1-tsc-not-found)
 
 **Miscellaneous**
 
@@ -95,5 +104,5 @@ currentWeatherByCity (city: $city){
 | 01.14.2024 | Added _type:module_ in package.json. |
 | 01.18.2024 | Fixed datasource bug. Backed to use  |
 
-- 01.18.2024 - Fixed datasource REST API bug. Since makeExecutableSchema() didnt't work datasource property, I backed to use original ApolloServer schema object as a parameter.
+- 01.18.2024 - Fixed the bug of datasources property for a REST API. Since makeExecutableSchema() doesn't work datasources property, I stopped using it and then create a schema object and then pass to ApolloServer as a parameter.
 - 01.18.2024 - Installed Typescript and @types/node. Converted all file extension from .js to .ts.
