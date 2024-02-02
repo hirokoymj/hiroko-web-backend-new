@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import { Category } from "../database/models/category.js";
 import { SubCategory } from "../database/models/subCategory.js";
 import { Topic } from "../database/models/topic.js";
@@ -31,12 +32,19 @@ export const topicResolvers = {
                 throw error;
             }
         },
-        topicById: (_, { id }) => {
-            const topic = Topic.findById(id);
-            return topic;
+        topicById: async (_, { id }) => {
+            try {
+                const _id = new mongoose.Types.ObjectId(id);
+                const topic = await Topic.findById({ _id });
+                return topic;
+            }
+            catch (error) {
+                console.log(error);
+                throw error;
+            }
         },
-        topicByCategory: (_, { categoryId }) => {
-            const topicArray = Topic.find({ category: categoryId }).sort({
+        topicByCategory: async (_, { categoryId }) => {
+            const topicArray = await Topic.find({ category: categoryId }).sort({
                 order: 1,
             });
             return topicArray;

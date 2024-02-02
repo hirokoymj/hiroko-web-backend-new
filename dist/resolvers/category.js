@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import { Category } from "../database/models/category.js";
 export const categoryResolvers = {
     Query: {
@@ -31,9 +32,16 @@ export const categoryResolvers = {
                 throw error;
             }
         },
-        categoryById: (_, { id }) => {
-            const category = Category.findById(id);
-            return category;
+        categoryById: async (_, { id }) => {
+            try {
+                const _id = new mongoose.Types.ObjectId(id);
+                const category = await Category.findById({ _id });
+                return category;
+            }
+            catch (error) {
+                console.log(error);
+                throw error;
+            }
         },
         categoryAll: async () => {
             try {

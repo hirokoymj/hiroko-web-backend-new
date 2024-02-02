@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import { Category } from "../database/models/category.js";
 import { SubCategory } from "../database/models/subCategory.js";
 export const subCategoryResolvers = {
@@ -34,9 +35,16 @@ export const subCategoryResolvers = {
                 throw error;
             }
         },
-        subCategoryById: (_, { id }) => {
-            const subCategory = SubCategory.findById(id);
-            return subCategory;
+        subCategoryById: async (_, { id }) => {
+            try {
+                const _id = new mongoose.Types.ObjectId(id);
+                const subCategory = await SubCategory.findById({ _id });
+                return subCategory;
+            }
+            catch (error) {
+                console.log(error);
+                throw error;
+            }
         },
         subCategoryByCategory: async (_, { categoryId }) => {
             try {

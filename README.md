@@ -32,7 +32,14 @@
 - [graphql-tools](https://the-guild.dev/graphql/tools/docs/introduction)
 - [Modularizing your GraphQL schema code](https://www.apollographql.com/blog/modularizing-your-graphql-schema-code)
 
-**Deployment**
+**Mongoose**
+
+- [mongoose version8.0.4](https://mongoosejs.com/docs/connections.html#options)
+- https://mongoosejs.com/docs/async-await.html
+
+<hr />
+
+**Heroku Deployment**
 
 - [Heroku: Deploying with Git](https://devcenter.heroku.com/articles/git#create-a-heroku-remote)
 - [heroku sh: 1: tsc: not found](https://stackoverflow.com/questions/70707931/heroku-sh-1-tsc-not-found)
@@ -41,7 +48,7 @@
 
 - [Receive DEP0170 when connecting MongoDB Atlas with Node.js 20.3.1](https://stackoverflow.com/questions/76594556/receive-dep0170-when-connecting-mongodb-atlas-with-node-js-20-3-1)
 - [Why is 'type: module' in package.json file?](https://stackoverflow.com/questions/61401475/why-is-type-module-in-package-json-file)
-- [mongoose version8.0.4](https://mongoosejs.com/docs/connections.html#options)
+
 - https://openweathermap.org/api
 
 ## Testing GraphQL queries

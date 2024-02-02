@@ -17,19 +17,6 @@ import { weatherResolvers } from "./resolvers/weather.js";
 import { cityResolvers } from "./resolvers/city.js";
 dotEnv.config();
 connection();
-// const Query = gql`
-//   scalar Date
-//   type Query {
-//     _: String
-//   }
-//   type Mutation {
-//     _: String
-//   }
-//   type PageInfo {
-//     endCursor: String
-//     hasNextPage: Boolean
-//   }
-// `;
 const server = new ApolloServer({
     typeDefs: [Query, Category, SubCategory, Topic, Weather, City],
     resolvers: [
