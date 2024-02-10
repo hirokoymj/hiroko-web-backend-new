@@ -113,3 +113,13 @@ currentWeatherByCity (city: $city){
 
 - 01.18.2024 - Fixed the bug of datasources property for a REST API. Since makeExecutableSchema() doesn't work datasources property, I stopped using it and then create a schema object and then pass to ApolloServer as a parameter.
 - 01.18.2024 - Installed Typescript and @types/node. Converted all file extension from .js to .ts.
+
+## Pagination
+
+https://www.apollographql.com/docs/react/pagination/offset-based
+
+https://www.apollographql.com/blog/tutorial
+
+https://www.antstack.com/blog/graphql-pagination-with-apollo-v3-part-1/
+
+https://www.antstack.com/blog/graphql-pagination-with-apollo-v3-part-2/
