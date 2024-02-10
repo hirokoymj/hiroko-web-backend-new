@@ -6,6 +6,7 @@ export const typeDef = gql`
     topicById(id: ID!): Topic!
     topicByCategory(categoryId: ID!): [Topic!]
     topicByCategoryAbbr(abbr: String!): [Topic!]
+    topicAll: [Topic!]
   }
 
   extend type Mutation {

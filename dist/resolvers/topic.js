@@ -61,6 +61,18 @@ export const topicResolvers = {
                 console.log(error);
             }
         },
+        topicAll: async (_) => {
+            try {
+                const topics = await Topic.find().sort({
+                    category: "asc",
+                    subCategory: "asc",
+                });
+                return topics;
+            }
+            catch (error) {
+                console.log(error);
+            }
+        },
     },
     Mutation: {
         createTopic: async (_, { input }) => {

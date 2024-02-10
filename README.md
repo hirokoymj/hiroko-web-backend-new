@@ -113,6 +113,7 @@ currentWeatherByCity (city: $city){
 
 - 01.18.2024 - Fixed the bug of datasources property for a REST API. Since makeExecutableSchema() doesn't work datasources property, I stopped using it and then create a schema object and then pass to ApolloServer as a parameter.
 - 01.18.2024 - Installed Typescript and @types/node. Converted all file extension from .js to .ts.
+- 02.10.2024 - Changed a sort key with category in `subCategoryAll` resolver.
 
 ## Pagination
 

@@ -62,7 +62,10 @@ export const subCategoryResolvers = {
     },
     subCategoryAll: async () => {
       try {
-        const subCategory = await SubCategory.find().sort({ category: "asc" });
+        const subCategory = await SubCategory.find().sort({
+          category: "asc",
+          order: "asc",
+        });
         return subCategory;
       } catch (error) {
         console.log(error);
