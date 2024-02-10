@@ -4,36 +4,13 @@ import { SubCategory } from "../database/models/subCategory.js";
 
 export const subCategoryResolvers = {
   Query: {
-    subCategories: async (_, { cursor, limit = 10, filter }) => {
+    subCategoryAll: async () => {
       try {
-        let query = {};
-
-        query = {
-          ...query,
-          ...(filter && { category: { $in: [...filter] } }),
-          ...(cursor && { _id: { $lt: cursor } }),
-        };
-
-        let subCategories = await SubCategory.find(query)
-          .sort({ _id: -1 })
-          .limit(limit + 1);
-
-        const hasNextPage = subCategories.length > limit;
-        subCategories = hasNextPage
-          ? subCategories.slice(0, -1)
-          : subCategories;
-
-        const totalCount = await SubCategory.countDocuments();
-        return {
-          subCategoryFeed: subCategories,
-          totalCount,
-          pageInfo: {
-            endCursor: hasNextPage
-              ? subCategories[subCategories.length - 1].id
-              : null,
-            hasNextPage,
-          },
-        };
+        const subCategory = await SubCategory.find().sort({
+          category: "asc",
+          order: "asc",
+        });
+        return subCategory;
       } catch (error) {
         console.log(error);
         throw error;
@@ -55,18 +32,6 @@ export const subCategoryResolvers = {
           category: categoryId,
         }).sort({ order: -1 });
         return subCategoryArray;
-      } catch (error) {
-        console.log(error);
-        throw error;
-      }
-    },
-    subCategoryAll: async () => {
-      try {
-        const subCategory = await SubCategory.find().sort({
-          category: "asc",
-          order: "asc",
-        });
-        return subCategory;
       } catch (error) {
         console.log(error);
         throw error;

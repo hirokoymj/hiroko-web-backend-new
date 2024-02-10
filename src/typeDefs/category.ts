@@ -2,9 +2,8 @@ import { gql } from "apollo-server";
 
 export const typeDef = gql`
   extend type Query {
-    categories(limit: Int, cursor: String, filter: [String]): CategoryFeed!
-    categoryById(id: ID!): Category!
     categoryAll: [Category!]
+    categoryById(id: ID!): Category!
   }
 
   extend type Mutation {

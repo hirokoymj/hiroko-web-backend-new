@@ -5,33 +5,15 @@ import { Topic } from "../database/models/topic.js";
 
 export const topicResolvers = {
   Query: {
-    topics: async (_, { cursor, limit = 10, filter }) => {
+    topicAll: async (_) => {
       try {
-        let query = {};
-
-        query = {
-          ...query,
-          ...(filter && { category: { $in: [...filter] } }),
-          ...(cursor && { _id: { $lt: cursor } }),
-        };
-        let topics = await Topic.find(query)
-          .sort({ order: 1 })
-          .limit(limit + 1);
-        const hasNextPage = topics.length > limit;
-        topics = hasNextPage ? topics.slice(0, -1) : topics;
-
-        const totalCount = await Topic.countDocuments();
-        return {
-          topicFeed: topics,
-          totalCount,
-          pageInfo: {
-            endCursor: hasNextPage ? topics[topics.length - 1].id : null,
-            hasNextPage,
-          },
-        };
+        const topics = await Topic.find().sort({
+          category: "asc",
+          subCategory: "asc",
+        });
+        return topics;
       } catch (error) {
         console.log(error);
-        throw error;
       }
     },
     topicById: async (_, { id }) => {
@@ -55,17 +37,6 @@ export const topicResolvers = {
         const { id } = await Category.findOne({ abbr });
         const topics = await Topic.find({ category: id }).sort({
           order: 1,
-        });
-        return topics;
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    topicAll: async (_) => {
-      try {
-        const topics = await Topic.find().sort({
-          category: "asc",
-          subCategory: "asc",
         });
         return topics;
       } catch (error) {

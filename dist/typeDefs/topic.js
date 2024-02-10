@@ -1,11 +1,10 @@
 import { gql } from "apollo-server";
 export const typeDef = gql `
   extend type Query {
-    topics(limit: Int, cursor: String, filter: [String]): TopicFeed!
+    topicAll: [Topic!]
     topicById(id: ID!): Topic!
     topicByCategory(categoryId: ID!): [Topic!]
     topicByCategoryAbbr(abbr: String!): [Topic!]
-    topicAll: [Topic!]
   }
 
   extend type Mutation {

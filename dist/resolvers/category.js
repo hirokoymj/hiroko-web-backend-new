@@ -2,30 +2,10 @@ import mongoose from "mongoose";
 import { Category } from "../database/models/category.js";
 export const categoryResolvers = {
     Query: {
-        categories: async (_, { cursor, limit = 10, filter }) => {
+        categoryAll: async () => {
             try {
-                let query = {};
-                query = {
-                    ...query,
-                    ...(filter && { _id: { $in: [...filter] } }),
-                    ...(cursor && { _id: { $lt: cursor } }),
-                };
-                let categories = await Category.find(query)
-                    .sort({ _id: -1 })
-                    .limit(limit + 1);
-                const hasNextPage = categories.length > limit;
-                categories = hasNextPage ? categories.slice(0, -1) : categories;
-                const totalCount = await Category.countDocuments();
-                return {
-                    categoryFeed: categories,
-                    totalCount,
-                    pageInfo: {
-                        endCursor: hasNextPage
-                            ? categories[categories.length - 1].id
-                            : null,
-                        hasNextPage,
-                    },
-                };
+                const category = await Category.find().sort({ name: "asc" });
+                return category;
             }
             catch (error) {
                 console.log(error);
@@ -36,16 +16,6 @@ export const categoryResolvers = {
             try {
                 const _id = new mongoose.Types.ObjectId(id);
                 const category = await Category.findById({ _id });
-                return category;
-            }
-            catch (error) {
-                console.log(error);
-                throw error;
-            }
-        },
-        categoryAll: async () => {
-            try {
-                const category = await Category.find().sort({ name: "asc" });
                 return category;
             }
             catch (error) {
