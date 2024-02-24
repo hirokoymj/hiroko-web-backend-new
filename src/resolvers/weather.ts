@@ -1,8 +1,8 @@
 export const weatherResolvers = {
   Query: {
-    currentWeatherByCity: (_, { city, unit = "metric" }, { dataSources }) =>
-      dataSources.myWeatherAPI.getCurrentWeather(city, unit),
-    dailyForecast: (_, { city, unit = "metric" }, { dataSources }) =>
-      dataSources.myWeatherAPI.getDailyForecast(city, unit),
+    currentWeather: (_, { lat, lon, unit = "metrics" }, { dataSources }) =>
+      dataSources.myWeatherAPI.getCurrentWeather(lat, lon),
+    dailyForecast: (_, { lat, lon, unit = "metrics" }, { dataSources }) =>
+      dataSources.myWeatherAPI.getDailyForecast(lat, lon),
   },
 };

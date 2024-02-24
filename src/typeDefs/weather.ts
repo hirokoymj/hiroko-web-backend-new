@@ -2,8 +2,8 @@ import { gql } from "apollo-server";
 
 export const typeDef = gql`
   extend type Query {
-    currentWeatherByCity(city: String!, unit: Units): CurrentWeather
-    dailyForecast(city: String!, unit: Units): DailyForecast
+    currentWeather(lat: Float!, lon: Float!, unit: Units): CurrentWeather
+    dailyForecast(lat: Float!, lon: Float!, unit: Units): DailyForecast
   }
 
   enum Units {
@@ -35,7 +35,7 @@ export const typeDef = gql`
   }
 
   type CurrentWeather {
-    id: Int! # Use cityId
+    cityId: Int!
     cityInfo: CityInfo
     weather: Weather
   }
@@ -48,12 +48,10 @@ export const typeDef = gql`
     humidity: Float
     wind: Float
     rain: Float
-    sunrise: Int
-    sunset: Int
   }
 
   type DailyForecast {
-    id: Int! # Use cityId
+    cityId: Int!
     cityInfo: CityInfo
     forecastList: [Forecast]
   }

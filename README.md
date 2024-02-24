@@ -1,31 +1,107 @@
 # GraphQL API for hirokoymj.com
 
-- Production: https://hiroko-web-backend-new-08d39ee2590b.herokuapp.com/
-- Localhost: http://localhost:4000/
-- MongoDB Atlas: https://account.mongodb.com/account/login?nds=true
+- Production URL: https://hiroko-web-backend-new-08d39ee2590b.herokuapp.com/
+- Database: [MongoDB Atlas](https://account.mongodb.com/account/login?nds=true):
 
 ## Technologies
 
-- Node.js, Apollo Server v3, Typescript, MongoDB/Mongoose, Weather API
+- Node.js (Typescript)
+- Apollo Server version 3
+- Mongoose version 8.2.0
+- Open Weather Map API
 
 ## Deployment platform
 
 - Heroku
 - Region: United States
 - Plan: Basic (Max of $7.00/month)
-- Features: Heroku CLI, Auto-deploy enabled
+- App Name: hirokoymj-backend-new
+- Features: Heroku CLI, Auto-deploy from Github repository
 
-## References:
+## OpenWeather Map API
 
-**Apollo Server**
+- Plan: Free (60 calls/minute, 1,000,000 calls/month)
+- Available APIs:
+  - [Current Weather](https://openweathermap.org/current)
+  - [3-hour Forecast 5 days](https://openweathermap.org/forecast5)
 
-- [Apollo Server v3](https://www.apollographql.com/docs/apollo-server/v3)
-- [Apollo Server 3: Custom scalars](https://www.apollographql.com/docs/apollo-server/v3/schema/custom-scalars)
-- [Apollo Server 3: Data sources](https://www.apollographql.com/docs/apollo-server/v3/data/data-sources)
-- [Migrating to Apollo Server 3](https://www.apollographql.com/docs/apollo-server/v3/migration)
-- [apollo-datasource-rest](https://www.npmjs.com/package/apollo-datasource-rest)
-- [@apollo/datasource-rest](https://www.npmjs.com/package/@apollo/datasource-rest)
-- [Apollo Server v4 Get started](https://www.apollographql.com/docs/apollo-server/getting-started)
+## Testing my GraphQL API
+
+- https://studio.apollographql.com/sandbox/explorer
+
+**Test Query 1**
+
+```
+query GetCat {
+  categoryAll {
+    id
+  }
+}
+```
+
+**Test Query 2**
+
+```
+query GetCat {
+  categories {
+    categoryFeed {
+      abbr
+    }
+  }
+}
+```
+
+**Test Query 3**
+
+```
+query CurrentWeather($lat: Float!, $lon: Float!) {
+  currentWeather(lat: $lat, lon: $lon) {
+    cityId
+    cityInfo {
+      country
+      name
+      lat
+      lon
+      country
+    }
+    weather {
+      condition
+      description
+      dt
+      feelsLike
+      humidity
+      icon
+      temperature {
+        day
+        max
+        min
+      }
+    }
+  }
+}
+## Query Variable
+{
+  "lat": 35.6895,
+  "lon": 139.6917
+}
+```
+
+**Test Query 4**
+
+```
+query DailyForecast($lat: Float!, $lon: Float!) {
+  dailyForecast(lat: $lat, lon: $lon) {
+    cityId
+  }
+}
+## Query Variable
+{
+  "lat": 35.6895,
+  "lon": 139.6917
+}
+```
+
+## References
 
 **graphql-tools**
 
@@ -51,58 +127,6 @@
 
 - https://openweathermap.org/api
 
-## Testing GraphQL queries
-
-- https://studio.apollographql.com/sandbox/explorer
-
-```
-query GetCat {
-  categoryAll {
-    id
-  }
-}
-```
-
-```
-query GetCat {
-  categories {
-    categoryFeed {
-      abbr
-    }
-  }
-}
-```
-
-- Test Query 2 (datasource REST API)
-
-```
-query GetForcast($city: String!){
-  dailyForecast (city: $city){
-    id
-    cityInfo{
-      name
-      country
-    }
-  }
-}
-# Query variables
-{
-  "city": "tokyo"
-}
-```
-
-```
-query GetWeather($city: String!){
-currentWeatherByCity (city: $city){
-  id
-}
-}
-# Query variables
-{
-  "city": "tokyo"
-}
-```
-
 ## History
 
 | Date       | Description                          |
@@ -114,13 +138,3 @@ currentWeatherByCity (city: $city){
 - 01.18.2024 - Fixed the bug of datasources property for a REST API. Since makeExecutableSchema() doesn't work datasources property, I stopped using it and then create a schema object and then pass to ApolloServer as a parameter.
 - 01.18.2024 - Installed Typescript and @types/node. Converted all file extension from .js to .ts.
 - 02.10.2024 - Changed a sort key with category in `subCategoryAll` resolver.
-
-## Pagination
-
-https://www.apollographql.com/docs/react/pagination/offset-based
-
-https://www.apollographql.com/blog/tutorial
-
-https://www.antstack.com/blog/graphql-pagination-with-apollo-v3-part-1/
-
-https://www.antstack.com/blog/graphql-pagination-with-apollo-v3-part-2/
