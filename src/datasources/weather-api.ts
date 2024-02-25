@@ -11,7 +11,7 @@ export default class WeatherAPI extends RESTDataSource {
     this.baseURL = "https://api.openweathermap.org/";
   }
 
-  async getCurrentWeather(lat: number, lon: number, unit) {
+  async getCurrentWeather(lat: number, lon: number, unit = "metric") {
     const response = await this.get(
       `data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${unit}`
     );
@@ -47,7 +47,7 @@ export default class WeatherAPI extends RESTDataSource {
     };
   }
 
-  async getDailyForecast(lat: number, lon: number, unit = "metric") {
+  async getDailyForecast(lat: number, lon: number, unit = "metrics") {
     const response = await this.get(
       `data/2.5/forecast?lat=${lat}&lon=${lon}&cnt=7&appid=${apiKey}&units=${unit}`
     );
