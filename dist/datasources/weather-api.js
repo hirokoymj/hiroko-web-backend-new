@@ -1,15 +1,15 @@
 import { RESTDataSource } from "apollo-datasource-rest";
-import dotEnv from "dotenv";
 import _ from "lodash";
-dotEnv.config();
-const apiKey = process.env.WEATHER_API_KEY;
+// dotEnv.config();
+// const apiKey = process.env.WEATHER_API_KEY;
+const apiKey = "be2d43efb7b89c5d69256d7ec44da9b8";
 export default class WeatherAPI extends RESTDataSource {
     constructor() {
         super();
         this.baseURL = "https://api.openweathermap.org/";
     }
-    async getCurrentWeather(lat, lon, unit = "metric") {
-        const response = await this.get(`data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${unit}`);
+    async getCurrentWeather(lat, lon) {
+        const response = await this.get(`data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`);
         const { coord, weather, main, sys, dt, id, name } = response;
         const { main: condition = "", description = "", icon = "" } = weather[0];
         const cityId = id;
@@ -38,8 +38,8 @@ export default class WeatherAPI extends RESTDataSource {
             weather: weather_info,
         };
     }
-    async getDailyForecast(lat, lon, unit = "metrics") {
-        const response = await this.get(`data/2.5/forecast?lat=${lat}&lon=${lon}&cnt=7&appid=${apiKey}&units=${unit}`);
+    async getDailyForecast(lat, lon) {
+        const response = await this.get(`data/2.5/forecast?lat=${lat}&lon=${lon}&cnt=7&appid=${apiKey}&units=metric`);
         const { id, name, country, coord } = _.get(response, "city", {});
         const cityId = id;
         const cityInfo = {
