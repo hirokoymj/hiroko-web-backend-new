@@ -60,7 +60,7 @@ export default class WeatherAPI extends RESTDataSource {
 
     const mappedData = map(list, (data) => {
       const { dt, temp, humidity, speed, sunrise, sunset } = data;
-      const { main, icon } = get(data, "weather[0]", []);
+      const { main, icon, description } = get(data, "weather[0]", []);
       const temperature = {
         day: get(temp, "day", 0),
         min: get(temp, "min", 0),
@@ -70,7 +70,7 @@ export default class WeatherAPI extends RESTDataSource {
 
       return {
         dt,
-        condition: main,
+        condition: description,
         icon,
         temperature,
         humidity,
