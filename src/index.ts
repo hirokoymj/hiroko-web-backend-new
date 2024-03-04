@@ -46,7 +46,7 @@ const server = new ApolloServer({
   ],
   dataSources: () => {
     return {
-      myWeatherAPI: new WeatherAPI(),
+      weatherAPI: new WeatherAPI(),
     };
   },
 });

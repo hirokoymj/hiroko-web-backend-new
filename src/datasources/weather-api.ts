@@ -1,9 +1,7 @@
 import { RESTDataSource } from "apollo-datasource-rest";
-import dotEnv from "dotenv";
-import _ from "lodash";
+import get from "lodash/get.js";
+import map from "lodash/map.js";
 
-// dotEnv.config();
-// const apiKey = process.env.WEATHER_API_KEY;
 const apiKey = "be2d43efb7b89c5d69256d7ec44da9b8";
 
 export default class WeatherAPI extends RESTDataSource {
@@ -12,91 +10,87 @@ export default class WeatherAPI extends RESTDataSource {
     this.baseURL = "https://api.openweathermap.org/";
   }
 
-  async getCurrentWeather(lat: number, lon: number) {
+  async getCurrentWeatherByCity(city, unit) {
     const response = await this.get(
-      `data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`
+      `data/2.5/weather?q=${city}&units=${unit}&appid=${apiKey}`
     );
 
-    const { coord, weather, main, sys, dt, id, name } = response;
-    const { main: condition = "", description = "", icon = "" } = weather[0];
-
-    const cityId = id;
+    const id = get(response, "id"); // City Id
     const cityInfo = {
-      name,
-      country: _.get(sys, "country", ""),
-      lon: _.get(coord, "lon", 0),
-      lat: _.get(coord, "lat", 0),
+      name: get(response, "name", ""),
+      country: get(response, "sys.country", ""),
+      lon: get(response, "coord.lon"),
+      lat: get(response, "coord.lat"),
     };
-    const weather_info = {
-      dt,
-      condition,
-      description,
-      icon,
+    const weather = {
+      dt: get(response, "dt"),
+      condition: get(response, "weather[0].main"),
+      description: get(response, "weather[0].description"),
+      icon: get(response, "weather[0].icon"),
       temperature: {
-        day: _.get(main, "temp", 0),
-        min: _.get(main, "temp_min", 0),
-        max: _.get(main, "temp_max", 0),
+        day: get(response, "main.temp"),
+        min: get(response, "main.temp_min"),
+        max: get(response, "main.temp_max"),
       },
-      feelsLike: _.get(main, "feels_like", 0),
-      humidity: _.get(main, "humidity", 0),
+      feelsLike: get(response, "main.feels_like"),
+      humidity: get(response, "main.humidity"),
     };
 
     return {
-      cityId,
+      id,
       cityInfo,
-      weather: weather_info,
+      weather,
     };
   }
 
-  async getDailyForecast(lat: number, lon: number) {
+  async getDailyForecast(city, unit) {
+    const days = 7;
     const response = await this.get(
-      `data/2.5/forecast?lat=${lat}&lon=${lon}&cnt=7&appid=${apiKey}&units=metric`
+      `data/2.5/forecast/daily?q=${city}&units=${unit}&cnt=${days}&appid=${apiKey}`
     );
 
-    const { id, name, country, coord } = _.get(response, "city", {});
-    const cityId = id;
+    const id = get(response, "city.id");
     const cityInfo = {
-      name,
-      country,
-      lat: _.get(coord, "lat", 0),
-      lon: _.get(coord, "lon", 0),
+      name: get(response, "city.name"),
+      country: get(response, "city.country"),
+      lon: get(response, "city.coord.lon", 0),
+      lat: get(response, "city.coord.lat", 0),
     };
+    const list = get(response, "list", []);
 
-    const list = _.get(response, "list", []);
-    const mappedData = _.map(list, (data) => {
-      const { dt, main, wind } = data;
-      const { icon, description } = _.get(data, "weather[0]", []);
+    const mappedData = map(list, (data) => {
+      const { dt, temp, humidity, speed, sunrise, sunset } = data;
+      const { main, icon } = get(data, "weather[0]", []);
       const temperature = {
-        day: _.get(main, "temp", 0),
-        min: _.get(main, "temp_min", 0),
-        max: _.get(main, "temp_max", 0),
+        day: get(temp, "day", 0),
+        min: get(temp, "min", 0),
+        max: get(temp, "max", 0),
       };
-
-      const humidity = _.get(main, "humidity", 0);
-      const speed = _.get(wind, "speed", 0);
-      const rain = _.get(data, "rain") == null ? 0 : _.get(data, "rain.3h");
+      const rain = get(data, "rain") == null ? 0 : get(data, "rain");
 
       return {
         dt,
-        condition: description,
+        condition: main,
         icon,
         temperature,
         humidity,
         wind: speed,
         rain,
+        sunrise,
+        sunset,
       };
     });
 
     return {
-      cityId,
+      id,
       cityInfo,
       forecastList: mappedData,
     };
   }
 }
 
-/// TEST///
-//https://api.openweathermap.org/data/2.5/weather?lat=35.6895&lon=139.6917&appid=be2d43efb7b89c5d69256d7ec44da9b8
-//Geo coords [35.6895, 139.6917]
-// Call 5 day / 3 hour forecast data
-//https://api.openweathermap.org/data/2.5/forecast?lat=35.6895&lon=139.6917&cnt=7&appid=be2d43efb7b89c5d69256d7ec44da9b8
+// TEST URL - Current Weather
+// https://api.openweathermap.org/data/2.5/weather?q=tokyo&units=metric&appid=be2d43efb7b89c5d69256d7ec44da9b8
+
+// TEST URL - DailyForecast
+// https://api.openweathermap.org/data/2.5/forecast/daily?q=tokyo&units=metric&cnt=7&appid=be2d43efb7b89c5d69256d7ec44da9b8
