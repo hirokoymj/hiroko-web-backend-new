@@ -1,14 +1,27 @@
-import mongoose from "mongoose";
-import { Category } from "../database/models/category.js";
+import mongoose from 'mongoose';
+import { Category } from '../database/models/category.js';
 
 export const categoryResolvers = {
   Query: {
-    categoryAll: async () => {
+    categoryAll: async (_, { limit, skip }) => {
       try {
-        const category = await Category.find().sort({ name: "asc" });
-        return category;
+        const totalCount = await Category.countDocuments({});
+
+        let query = Category.find().sort({ name: 'asc' });
+        if (typeof limit === 'number' && limit > 0) {
+          query = query.limit(limit);
+        }
+
+        if (typeof skip === 'number' && skip >= 0) {
+          query = query.skip(skip);
+        }
+        const categories = await query.exec(); // Execute the query
+        return {
+          categories,
+          totalCount,
+        };
       } catch (error) {
-        console.log(error);
+        console.error('Error in categoryAll resolver:', error);
         throw error;
       }
     },

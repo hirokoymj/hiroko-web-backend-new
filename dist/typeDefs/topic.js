@@ -1,10 +1,15 @@
-import { gql } from "apollo-server";
+import { gql } from 'apollo-server';
 export const typeDef = gql `
   extend type Query {
-    topicAll: [Topic!]
+    topicAll(limit: Int, skip: Int): PaginatedTopics
     topicById(id: ID!): Topic!
     topicByCategory(categoryId: ID!): [Topic!]
     topicByCategoryAbbr(abbr: String!): [Topic!]
+  }
+
+  type PaginatedTopics {
+    topics: [Topic!]!
+    totalCount: Int!
   }
 
   extend type Mutation {
