@@ -103,24 +103,22 @@ currentWeatherByCity (city: $city){
 }
 ```
 
-## History
-
-| Date       | Description                          |
-| ---------- | ------------------------------------ |
-| 01.14.2024 | Migrated Apollo Server v2 to v3.     |
-| 01.14.2024 | Added _type:module_ in package.json. |
-| 01.18.2024 | Fixed datasource bug. Backed to use  |
-
-- 01.18.2024 - Fixed the bug of datasources property for a REST API. Since makeExecutableSchema() doesn't work datasources property, I stopped using it and then create a schema object and then pass to ApolloServer as a parameter.
-- 01.18.2024 - Installed Typescript and @types/node. Converted all file extension from .js to .ts.
-- 02.10.2024 - Changed a sort key with category in `subCategoryAll` resolver.
-
 ## Pagination
 
-https://www.apollographql.com/docs/react/pagination/offset-based
-
-https://www.apollographql.com/blog/tutorial
-
-https://www.antstack.com/blog/graphql-pagination-with-apollo-v3-part-1/
-
-https://www.antstack.com/blog/graphql-pagination-with-apollo-v3-part-2/
+```js
+query TopicAll {
+  topicAll (limit: 5, skip: 15){
+    topics {
+      title
+      category {
+        name
+      }
+      subCategory {
+        name
+        order
+      }
+    }
+    totalCount
+  }
+}
+```

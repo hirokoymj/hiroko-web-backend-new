@@ -9,8 +9,8 @@ export const topicResolvers = {
                 const totalCount = await Topic.countDocuments({});
                 let query = Topic.find().sort({
                     category: 'asc',
-                    'subCaztegory.name': 'asc',
-                    'subCategory.order': 'asc',
+                    subCategory: 'asc',
+                    order: 'asc',
                 });
                 if (typeof limit === 'number' && limit > 0) {
                     query = query.limit(limit);
