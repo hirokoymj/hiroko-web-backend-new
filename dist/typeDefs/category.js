@@ -1,6 +1,7 @@
 import { gql } from 'apollo-server';
 export const typeDef = gql `
   extend type Query {
+    categories: [Category!]
     categoryAll(limit: Int, skip: Int): PaginatedCategories
     categoryById(id: ID!): Category!
   }
@@ -33,11 +34,5 @@ export const typeDef = gql `
     name: String!
     abbr: String!
     order: Int
-  }
-
-  type CategoryFeed {
-    categoryFeed: [Category!]
-    totalCount: Int!
-    pageInfo: PageInfo!
   }
 `;

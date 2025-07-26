@@ -2,10 +2,20 @@ import mongoose from 'mongoose';
 import { Category } from '../database/models/category.js';
 export const categoryResolvers = {
     Query: {
+        categories: async () => {
+            try {
+                const category = await Category.find().sort({ name: 1 });
+                return category;
+            }
+            catch (error) {
+                console.log(error);
+                throw error;
+            }
+        },
         categoryAll: async (_, { limit, skip }) => {
             try {
                 const totalCount = await Category.countDocuments({});
-                let query = Category.find().sort({ name: 'asc' });
+                let query = Category.find().sort({ createdAt: -1 });
                 if (typeof limit === 'number' && limit > 0) {
                     query = query.limit(limit);
                 }

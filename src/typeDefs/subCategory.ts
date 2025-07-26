@@ -2,6 +2,7 @@ import { gql } from 'apollo-server';
 
 export const typeDef = gql`
   extend type Query {
+    subCategories: [SubCategory!]
     subCategoryAll(limit: Int, skip: Int): PaginatedSubCategories
     subCategoryById(id: ID!): SubCategory
     subCategoryByCategory(categoryId: ID): [SubCategory!]
@@ -39,9 +40,9 @@ export const typeDef = gql`
     updatedAt: Date!
   }
 
-  type SubCategoryFeed {
-    subCategoryFeed: [SubCategory!]
-    totalCount: Int!
-    pageInfo: PageInfo!
-  }
+  #   type SubCategoryFeed {
+  #     subCategoryFeed: [SubCategory!]
+  #     totalCount: Int!
+  #     pageInfo: PageInfo!
+  #   }
 `;

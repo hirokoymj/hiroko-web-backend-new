@@ -5,14 +5,26 @@ import { Topic } from '../database/models/topic.js';
 
 export const topicResolvers = {
   Query: {
+    topics: async (_) => {
+      try {
+        const topics = await Topic.find().sort({
+          category: 1,
+          subCategory: 1,
+        });
+        return topics;
+      } catch (error) {
+        console.log(error);
+      }
+    },
     topicAll: async (_, { limit, skip }) => {
       try {
         const totalCount = await Topic.countDocuments({});
 
         let query = Topic.find().sort({
-          category: 'asc',
-          subCategory: 'asc',
-          order: 'asc',
+          createdAt: -1,
+          updatedAt: -1,
+          category: 1,
+          subCategory: 1,
         });
 
         if (typeof limit === 'number' && limit > 0) {

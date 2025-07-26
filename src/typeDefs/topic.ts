@@ -2,6 +2,7 @@ import { gql } from 'apollo-server';
 
 export const typeDef = gql`
   extend type Query {
+    topics: [Topic!]
     topicAll(limit: Int, skip: Int): PaginatedTopics
     topicById(id: ID!): Topic!
     topicByCategory(categoryId: ID!): [Topic!]
@@ -46,9 +47,9 @@ export const typeDef = gql`
     updatedAt: Date
   }
 
-  type TopicFeed {
-    topicFeed: [Topic!]
-    totalCount: Int!
-    pageInfo: PageInfo!
-  }
+  #   type TopicFeed {
+  #     topicFeed: [Topic!]
+  #     totalCount: Int!
+  #     pageInfo: PageInfo!
+  #   }
 `;

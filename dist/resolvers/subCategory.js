@@ -3,12 +3,24 @@ import { Category } from '../database/models/category.js';
 import { SubCategory } from '../database/models/subCategory.js';
 export const subCategoryResolvers = {
     Query: {
+        subCategories: async () => {
+            try {
+                const subCategory = await SubCategory.find().sort({
+                    name: 1,
+                });
+                return subCategory;
+            }
+            catch (error) {
+                console.log(error);
+                throw error;
+            }
+        },
         subCategoryAll: async (_, { limit, skip }) => {
             try {
-                const totalCount = await Category.countDocuments({});
+                const totalCount = await SubCategory.countDocuments({});
                 let query = SubCategory.find().sort({
-                    category: 'asc',
-                    order: 'asc',
+                    category: 1,
+                    order: 1,
                 });
                 if (typeof limit === 'number' && limit > 0) {
                     query = query.limit(limit);
