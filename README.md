@@ -11,7 +11,7 @@
 
 ## Deployment - Heroku
 
-- Heroku app name: hiroko-web-backend-new
+- App name: `hiroko-web-backend-new`
 
 ```js
 heroku login
