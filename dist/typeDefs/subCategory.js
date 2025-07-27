@@ -1,9 +1,14 @@
-import { gql } from "apollo-server";
+import { gql } from 'apollo-server';
 export const typeDef = gql `
   extend type Query {
-    subCategoryAll: [SubCategory!]
+    subCategories: [SubCategory!]
+    subCategoryAll(limit: Int, skip: Int): PaginatedSubCategories
     subCategoryById(id: ID!): SubCategory
     subCategoryByCategory(categoryId: ID): [SubCategory!]
+  }
+  type PaginatedSubCategories {
+    subCategories: [SubCategory!]!
+    totalCount: Int!
   }
 
   extend type Mutation {
@@ -34,9 +39,9 @@ export const typeDef = gql `
     updatedAt: Date!
   }
 
-  type SubCategoryFeed {
-    subCategoryFeed: [SubCategory!]
-    totalCount: Int!
-    pageInfo: PageInfo!
-  }
+  #   type SubCategoryFeed {
+  #     subCategoryFeed: [SubCategory!]
+  #     totalCount: Int!
+  #     pageInfo: PageInfo!
+  #   }
 `;

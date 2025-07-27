@@ -1,19 +1,45 @@
-import mongoose from "mongoose";
-import { Category } from "../database/models/category.js";
-import { SubCategory } from "../database/models/subCategory.js";
-import { Topic } from "../database/models/topic.js";
+import mongoose from 'mongoose';
+import { Category } from '../database/models/category.js';
+import { SubCategory } from '../database/models/subCategory.js';
+import { Topic } from '../database/models/topic.js';
 export const topicResolvers = {
     Query: {
-        topicAll: async (_) => {
+        topics: async (_) => {
             try {
                 const topics = await Topic.find().sort({
-                    category: "asc",
-                    subCategory: "asc",
+                    category: 1,
+                    subCategory: 1,
                 });
                 return topics;
             }
             catch (error) {
                 console.log(error);
+            }
+        },
+        topicAll: async (_, { limit, skip }) => {
+            try {
+                const totalCount = await Topic.countDocuments({});
+                let query = Topic.find().sort({
+                    createdAt: -1,
+                    updatedAt: -1,
+                    category: 1,
+                    subCategory: 1,
+                });
+                if (typeof limit === 'number' && limit > 0) {
+                    query = query.limit(limit);
+                }
+                if (typeof skip === 'number' && skip >= 0) {
+                    query = query.skip(skip);
+                }
+                const topics = await query.exec();
+                return {
+                    topics,
+                    totalCount,
+                };
+            }
+            catch (error) {
+                console.error('Error in topicAll resolver:', error);
+                throw error;
             }
         },
         topicById: async (_, { id }) => {
