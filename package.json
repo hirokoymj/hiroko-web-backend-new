@@ -10,8 +10,7 @@
   "scripts": {
     "compile": "tsc",
     "start": "npm run compile && node ./dist/index.js",
-    "dev": "nodemon",
-    "generate": "graphql-codegen"
+    "dev": "nodemon"
   },
   "author": "Hiroko Y.",
   "license": "ISC",
