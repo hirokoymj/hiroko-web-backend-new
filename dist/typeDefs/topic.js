@@ -1,5 +1,5 @@
 import { gql } from 'graphql-tag';
-export const typeDef = gql `
+export const topicTypeDefs = gql `
   extend type Query {
     topics: [Topic!]
     topicAll(limit: Int, skip: Int): PaginatedTopics

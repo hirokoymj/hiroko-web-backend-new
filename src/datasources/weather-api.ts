@@ -2,7 +2,6 @@ import { RESTDataSource } from '@apollo/datasource-rest';
 import get from 'lodash/get.js';
 import map from 'lodash/map.js';
 
-//const apiKey = '4c7be587c84ac188dca5d7b86e565b11';
 const apiKey = process.env.WEATHER_APP_KEY;
 
 export default class WeatherAPI extends RESTDataSource {

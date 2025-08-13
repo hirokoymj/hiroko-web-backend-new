@@ -1,5 +1,5 @@
 import { gql } from 'graphql-tag';
-export const typeDef = gql `
+export const subCategoryTypeDefs = gql `
   extend type Query {
     subCategories: [SubCategory!]
     subCategoryAll(limit: Int, skip: Int): PaginatedSubCategories

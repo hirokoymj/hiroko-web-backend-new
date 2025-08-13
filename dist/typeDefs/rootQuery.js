@@ -1,5 +1,5 @@
 import { gql } from 'graphql-tag';
-export const Query = gql `
+export const rootTypeDefs = gql `
   scalar Date
   type Query {
     _: String

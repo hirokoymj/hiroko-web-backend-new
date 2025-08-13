@@ -1,5 +1,5 @@
 import { gql } from 'graphql-tag';
-export const typeDef = gql `
+export const cityTypeDefs = gql `
   extend type Query {
     cities(city: String!): [City]
   }

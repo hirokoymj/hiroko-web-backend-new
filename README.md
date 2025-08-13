@@ -7,11 +7,12 @@
 
 ## Technologies
 
-- Apollo Server v3(GraphQL), Typescript, MongoDB/Mongoose, RESTful API(Open Weather Map)
+- Apollo Server 5.0,
+- Typescript 5.3,
+- Mongoose
+- datasource-rest v6.4(Weather API for RESTful)
 
 ## Deployment - Heroku
-
-- App name: `hiroko-web-backend-new`
 
 ```js
 heroku login
@@ -24,11 +25,7 @@ git push heroku master
 
 **Apollo Server**
 
-- [Apollo Server v3](https://www.apollographql.com/docs/apollo-server/v3)
-- [Apollo Server 3: Custom scalars](https://www.apollographql.com/docs/apollo-server/v3/schema/custom-scalars)
-- [Apollo Server 3: Data sources](https://www.apollographql.com/docs/apollo-server/v3/data/data-sources)
-- [Migrating to Apollo Server 3](https://www.apollographql.com/docs/apollo-server/v3/migration)
-- [apollo-datasource-rest](https://www.npmjs.com/package/apollo-datasource-rest)
+- https://www.apollographql.com/docs/apollo-server
 
 **Mongoose**
 
