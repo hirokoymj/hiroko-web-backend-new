@@ -14,6 +14,11 @@
 
 ## Deployment - Heroku
 
+- Production App Name: hiroko-backend-new
+- Test App Name: hiroko-backend-test
+
+**Deployment**
+
 ```js
 heroku login
 //Verify the heroku and github remote repositories.
@@ -21,13 +26,14 @@ git remote -v
 git push heroku master
 ```
 
+**Switch Heroku app**
+
+```js
+git remote rm heroku
+heroku git:remote -a <new-app-name>
+```
+
 ## References:
 
-**Apollo Server**
-
 - https://www.apollographql.com/docs/apollo-server
-
-**Mongoose**
-
-- [mongoose](https://mongoosejs.com/docs/connections.html#options)
-- https://mongoosejs.com/docs/async-await.html
+- https://mongoosejs.com/docs/connections.html#options
