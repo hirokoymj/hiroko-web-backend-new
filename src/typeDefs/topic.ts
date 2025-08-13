@@ -1,6 +1,6 @@
-import { gql } from 'apollo-server';
+import { gql } from 'graphql-tag';
 
-export const typeDef = gql`
+export const topicTypeDefs = gql`
   extend type Query {
     topics: [Topic!]
     topicAll(limit: Int, skip: Int): PaginatedTopics
@@ -46,10 +46,4 @@ export const typeDef = gql`
     createdAt: Date
     updatedAt: Date
   }
-
-  #   type TopicFeed {
-  #     topicFeed: [Topic!]
-  #     totalCount: Int!
-  #     pageInfo: PageInfo!
-  #   }
 `;

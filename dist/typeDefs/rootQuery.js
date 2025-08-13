@@ -1,4 +1,4 @@
-import { gql } from "apollo-server";
+import { gql } from 'graphql-tag';
 export const Query = gql `
   scalar Date
   type Query {
@@ -6,9 +6,5 @@ export const Query = gql `
   }
   type Mutation {
     _: String
-  }
-  type PageInfo {
-    endCursor: String
-    hasNextPage: Boolean
   }
 `;
