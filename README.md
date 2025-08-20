@@ -7,33 +7,38 @@
 
 ## Technologies
 
-- Apollo Server 5.0,
-- Typescript 5.3,
+- Apollo Server 5.0
+- Typescript 5.3
 - Mongoose
-- datasource-rest v6.4(Weather API for RESTful)
+- datasource-rest v6.4 (Weather API for RESTful)
 
-## Deployment - Heroku
+## Deploy to Heroku
 
-- Production App Name: hiroko-backend-new
-- Test App Name: hiroko-backend-test
+- **Production app name** : hiroko-backend-new
+- **Test app name** : hiroko-backend-test
 
-**Deployment**
+**Deploy Heroku**
 
 ```js
 heroku login
-//Verify the heroku and github remote repositories.
 git remote -v
 git push heroku master
 ```
 
-**Switch Heroku app**
+**Remove Heroku remote URL**
 
 ```js
 git remote rm heroku
-heroku git:remote -a <new-app-name>
+```
+
+**Set a new Heroku URL**
+
+```js
+heroku git:remote -a  ############
 ```
 
 ## References:
 
-- https://www.apollographql.com/docs/apollo-server
-- https://mongoosejs.com/docs/connections.html#options
+- [Apollo Server official site](https://www.apollographql.com/docs/apollo-server)
+- [Mongoose API docs](https://mongoosejs.com/docs/connections.html#options)
+- [Apollo Odyssey Tutorial - GraphQL with TypeScript and Apollo Server](https://www.apollographql.com/tutorials/intro-typescript)
