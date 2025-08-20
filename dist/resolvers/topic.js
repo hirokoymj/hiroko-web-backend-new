@@ -72,6 +72,17 @@ export const topicResolvers = {
             }
         },
     },
+    // Resolver chain
+    Topic: {
+        category: async (parent) => {
+            const category = await Category.findById(parent.category);
+            return category;
+        },
+        subCategory: async (parent) => {
+            const subCategory = await SubCategory.findById(parent.subCategory);
+            return subCategory;
+        },
+    },
     Mutation: {
         createTopic: async (_, { input }) => {
             try {
@@ -101,17 +112,6 @@ export const topicResolvers = {
                 console.log(error);
                 throw error;
             }
-        },
-    },
-    // Field Level Resolver
-    Topic: {
-        category: async (parent) => {
-            const category = await Category.findById(parent.category);
-            return category;
-        },
-        subCategory: async (parent) => {
-            const subCategory = await SubCategory.findById(parent.subCategory);
-            return subCategory;
         },
     },
 };

@@ -1,5 +1,5 @@
-import { gql } from "apollo-server";
-export const typeDef = gql `
+import { gql } from 'graphql-tag';
+export const weatherTypeDefs = gql `
   extend type Query {
     currentWeatherByCity(city: String!, unit: Units): CurrentWeather
     dailyForecast(city: String!, unit: Units): DailyForecast

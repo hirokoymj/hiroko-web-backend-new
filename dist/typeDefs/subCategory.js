@@ -1,5 +1,5 @@
-import { gql } from 'apollo-server';
-export const typeDef = gql `
+import { gql } from 'graphql-tag';
+export const subCategoryTypeDefs = gql `
   extend type Query {
     subCategories: [SubCategory!]
     subCategoryAll(limit: Int, skip: Int): PaginatedSubCategories
@@ -38,10 +38,4 @@ export const typeDef = gql `
     createdAt: Date!
     updatedAt: Date!
   }
-
-  #   type SubCategoryFeed {
-  #     subCategoryFeed: [SubCategory!]
-  #     totalCount: Int!
-  #     pageInfo: PageInfo!
-  #   }
 `;

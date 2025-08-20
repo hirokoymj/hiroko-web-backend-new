@@ -7,30 +7,38 @@
 
 ## Technologies
 
-- Apollo Server v3(GraphQL), Typescript, MongoDB/Mongoose, RESTful API(Open Weather Map)
+- Apollo Server 5.0
+- Typescript 5.3
+- Mongoose
+- datasource-rest v6.4 (Weather API for RESTful)
 
-## Deployment - Heroku
+## Deploy to Heroku
 
-- App name: `hiroko-web-backend-new`
+- **Production app name** : hiroko-backend-new
+- **Test app name** : hiroko-backend-test
+
+**Deploy Heroku**
 
 ```js
 heroku login
-//Verify the heroku and github remote repositories.
 git remote -v
 git push heroku master
 ```
 
+**Remove Heroku remote URL**
+
+```js
+git remote rm heroku
+```
+
+**Set a new Heroku URL**
+
+```js
+heroku git:remote -a  ############
+```
+
 ## References:
 
-**Apollo Server**
-
-- [Apollo Server v3](https://www.apollographql.com/docs/apollo-server/v3)
-- [Apollo Server 3: Custom scalars](https://www.apollographql.com/docs/apollo-server/v3/schema/custom-scalars)
-- [Apollo Server 3: Data sources](https://www.apollographql.com/docs/apollo-server/v3/data/data-sources)
-- [Migrating to Apollo Server 3](https://www.apollographql.com/docs/apollo-server/v3/migration)
-- [apollo-datasource-rest](https://www.npmjs.com/package/apollo-datasource-rest)
-
-**Mongoose**
-
-- [mongoose](https://mongoosejs.com/docs/connections.html#options)
-- https://mongoosejs.com/docs/async-await.html
+- [Apollo Server official site](https://www.apollographql.com/docs/apollo-server)
+- [Mongoose API docs](https://mongoosejs.com/docs/connections.html#options)
+- [Apollo Odyssey Tutorial - GraphQL with TypeScript and Apollo Server](https://www.apollographql.com/tutorials/intro-typescript)

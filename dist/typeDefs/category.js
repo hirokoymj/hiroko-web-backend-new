@@ -1,5 +1,5 @@
-import { gql } from 'apollo-server';
-export const typeDef = gql `
+import { gql } from 'graphql-tag';
+export const categoryTypeDefs = gql `
   extend type Query {
     categories: [Category!]
     categoryAll(limit: Int, skip: Int): PaginatedCategories

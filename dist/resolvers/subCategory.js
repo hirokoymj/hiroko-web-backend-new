@@ -63,6 +63,13 @@ export const subCategoryResolvers = {
             }
         },
     },
+    // Resolver chain
+    SubCategory: {
+        category: async (parent) => {
+            const category = await Category.findById(parent.category);
+            return category;
+        },
+    },
     Mutation: {
         createSubCategory: async (_, { input }) => {
             try {
@@ -93,13 +100,6 @@ export const subCategoryResolvers = {
                 console.log(error);
                 throw error;
             }
-        },
-    },
-    // Field Level Resolver
-    SubCategory: {
-        category: async (parent) => {
-            const category = await Category.findById(parent.category);
-            return category;
         },
     },
 };

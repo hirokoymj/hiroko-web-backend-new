@@ -1,5 +1,5 @@
-import { gql } from "apollo-server";
-export const typeDef = gql `
+import { gql } from 'graphql-tag';
+export const cityTypeDefs = gql `
   extend type Query {
     cities(city: String!): [City]
   }

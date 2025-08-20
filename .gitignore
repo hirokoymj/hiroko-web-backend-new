@@ -1,2 +1,12 @@
-node_modules
+# Ignore the compiled output.
+dist/
+
+# Node modules
+node_modules/
+
+# Env file
 .env
+
+# Mac OS
+.DS_Store
+

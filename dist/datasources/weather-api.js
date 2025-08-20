@@ -1,10 +1,10 @@
-import { RESTDataSource } from 'apollo-datasource-rest';
+import { RESTDataSource } from '@apollo/datasource-rest';
 import get from 'lodash/get.js';
 import map from 'lodash/map.js';
-const apiKey = '4c7be587c84ac188dca5d7b86e565b11';
+const apiKey = process.env.WEATHER_APP_KEY;
 export default class WeatherAPI extends RESTDataSource {
     constructor() {
-        super();
+        super(...arguments);
         this.baseURL = 'https://api.openweathermap.org/';
     }
     async getCurrentWeatherByCity(city, unit) {
@@ -74,7 +74,3 @@ export default class WeatherAPI extends RESTDataSource {
         };
     }
 }
-//TEST URL
-// https://api.openweathermap.org/data/2.5/forecast?lat=44.34&lon=10.99&appid=4c7be587c84ac188dca5d7b86e565b11
-// https://api.openweathermap.org/data/2.5/forecast/daily?q=tokyo&units=metric&cnt=7&appid=4c7be587c84ac188dca5d7b86e565b11
-// https://api.openweathermap.org/data/2.5/forecast/daily?q=tokyo&units=metric&cnt=7&appid=4c7be587c84ac188dca5d7b86e565b11
