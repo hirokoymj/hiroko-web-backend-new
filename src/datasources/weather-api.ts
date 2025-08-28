@@ -1,13 +1,14 @@
 import { RESTDataSource } from '@apollo/datasource-rest';
 import get from 'lodash/get.js';
 import map from 'lodash/map.js';
+import { CurrentWeather, DailyForecast } from '../types';
 
 const apiKey = process.env.WEATHER_APP_KEY;
 
-export default class WeatherAPI extends RESTDataSource {
+export class WeatherAPI extends RESTDataSource {
   baseURL = 'https://api.openweathermap.org/';
 
-  async getCurrentWeatherByCity(city, unit) {
+  async getCurrentWeatherByCity(city, unit): Promise<CurrentWeather> {
     const response = await this.get(
       `data/2.5/weather?q=${city}&units=${unit}&appid=${apiKey}`
     );
@@ -40,7 +41,7 @@ export default class WeatherAPI extends RESTDataSource {
     };
   }
 
-  async getDailyForecast(city, unit) {
+  async getDailyForecast(city, unit): Promise<DailyForecast> {
     const days = 7;
     const response = await this.get(
       `data/2.5/forecast/daily?q=${city}&units=${unit}&cnt=${days}&appid=${apiKey}`

@@ -4,7 +4,7 @@ import dotEnv from 'dotenv';
 
 import { connection } from './database/util/index.js';
 import { typeDefs } from './typeDefs/index.js';
-import WeatherAPI from './datasources/weather-api.js';
+import { WeatherAPI } from './datasources/weather-api.js';
 import { categoryResolvers } from './resolvers/category.js';
 import { subCategoryResolvers } from './resolvers/subCategory.js';
 import { topicResolvers } from './resolvers/topic.js';

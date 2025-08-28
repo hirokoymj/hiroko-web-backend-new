@@ -1,0 +1,180 @@
+scalar Date
+
+type Query {
+  categories: [Category!]
+  categoryAll(limit: Int, skip: Int): PaginatedCategories
+  categoryById(id: ID!): Category!
+  subCategories: [SubCategory!]
+  subCategoryAll(limit: Int, skip: Int): PaginatedSubCategories
+  subCategoryById(id: ID!): SubCategory
+  subCategoryByCategory(categoryId: ID): [SubCategory!]
+  topics: [Topic!]
+  topicAll(limit: Int, skip: Int): PaginatedTopics
+  topicById(id: ID!): Topic!
+  topicByCategory(categoryId: ID!): [Topic!]
+  topicByCategoryAbbr(abbr: String!): [Topic!]
+  currentWeatherByCity(city: String!, unit: Units): CurrentWeather
+  dailyForecast(city: String!, unit: Units): DailyForecast
+  cities(city: String!): [City]
+}
+
+type Mutation {
+  createCategory(input: createCategoryInput): Category
+  updateCategory(id: ID!, input: updateCategoryInput!): Category
+  deleteCategory(id: ID!): Category
+  createSubCategory(input: createSubCategoryInput): SubCategory
+  updateSubCategory(id: ID!, input: updateSubCategoryInput!): SubCategory
+  deleteSubCategory(id: ID!): SubCategory
+  createTopic(input: createTopicInput): Topic
+  deleteTopic(id: ID!): Topic
+  updateTopic(id: ID!, input: updateTopicInput!): Topic
+}
+
+type PaginatedCategories {
+  categories: [Category!]!
+  totalCount: Int!
+}
+
+type Category {
+  id: ID!
+  name: String!
+  abbr: String!
+  order: Int
+  createdAt: Date!
+  updatedAt: Date!
+}
+
+input updateCategoryInput {
+  name: String
+  abbr: String
+  order: Int
+}
+
+input createCategoryInput {
+  name: String!
+  abbr: String!
+  order: Int
+}
+
+type PaginatedSubCategories {
+  subCategories: [SubCategory!]!
+  totalCount: Int!
+}
+
+input createSubCategoryInput {
+  name: String!
+  category: ID!
+  order: Int
+  categoryOrder: Int
+}
+
+input updateSubCategoryInput {
+  name: String
+  order: Int
+  category: ID
+}
+
+type SubCategory {
+  id: ID!
+  name: String!
+  order: Int
+  category: Category
+  createdAt: Date!
+  updatedAt: Date!
+}
+
+type PaginatedTopics {
+  topics: [Topic!]!
+  totalCount: Int!
+}
+
+input createTopicInput {
+  title: String!
+  url: String!
+  category: ID!
+  subCategory: ID!
+  order: Int
+}
+
+input updateTopicInput {
+  title: String
+  url: String
+  category: ID!
+  subCategory: ID!
+  order: Int
+}
+
+type Topic {
+  id: ID!
+  title: String!
+  url: String!
+  category: Category
+  subCategory: SubCategory
+  order: Int
+  createdAt: Date
+  updatedAt: Date
+}
+
+enum Units {
+  metric
+  imperial
+}
+
+type Temperature {
+  day: Float
+  min: Float
+  max: Float
+}
+
+type CityInfo {
+  name: String
+  country: String
+  lon: String
+  lat: String
+}
+
+type Weather {
+  dt: Int!
+  condition: String
+  description: String
+  feelsLike: String
+  icon: String
+  temperature: Temperature
+  humidity: Float
+}
+
+type CurrentWeather {
+  id: Int!
+  cityInfo: CityInfo
+  weather: Weather
+}
+
+type Forecast {
+  dt: Int!
+  condition: String
+  icon: String
+  temperature: Temperature
+  humidity: Float
+  wind: Float
+  rain: Float
+  sunrise: Int
+  sunset: Int
+}
+
+type DailyForecast {
+  id: Int!
+  cityInfo: CityInfo
+  forecastList: [Forecast]
+}
+
+type City {
+  id: Int
+  name: String
+  country: String
+  coord: Coord
+}
+
+type Coord {
+  lon: Float
+  lat: Float
+}
