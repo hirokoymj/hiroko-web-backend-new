@@ -1,5 +1,8 @@
-import { gql } from 'graphql-tag';
-export const cityTypeDefs = gql `
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.cityTypeDefs = void 0;
+const graphql_tag_1 = require("graphql-tag");
+exports.cityTypeDefs = (0, graphql_tag_1.gql) `
   extend type Query {
     cities(city: String!): [City]
   }
@@ -16,3 +19,4 @@ export const cityTypeDefs = gql `
     lat: Float
   }
 `;
+//# sourceMappingURL=city.js.map

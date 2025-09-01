@@ -1,5 +1,8 @@
-import { gql } from 'graphql-tag';
-export const subCategoryTypeDefs = gql `
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.subCategoryTypeDefs = void 0;
+const graphql_tag_1 = require("graphql-tag");
+exports.subCategoryTypeDefs = (0, graphql_tag_1.gql) `
   extend type Query {
     subCategories: [SubCategory!]
     subCategoryAll(limit: Int, skip: Int): PaginatedSubCategories
@@ -39,3 +42,4 @@ export const subCategoryTypeDefs = gql `
     updatedAt: Date!
   }
 `;
+//# sourceMappingURL=subCategory.js.map

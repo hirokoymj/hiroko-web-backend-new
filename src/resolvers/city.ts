@@ -1,5 +1,4 @@
-import { City } from '../database/models/city.js';
-import { Resolvers, CityResolvers } from '../types.js';
+import { City } from '../database/models/city';
 
 export const cityResolvers = {
   Query: {

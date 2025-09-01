@@ -1,5 +1,8 @@
-import { model, Schema } from "mongoose";
-const topicSchema = new Schema({
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Topic = void 0;
+const mongoose_1 = require("mongoose");
+const topicSchema = new mongoose_1.Schema({
     title: {
         type: String,
         required: true,
@@ -9,11 +12,11 @@ const topicSchema = new Schema({
         required: true,
     },
     category: {
-        type: Schema.Types.ObjectId,
+        type: mongoose_1.Schema.Types.ObjectId,
         ref: "Category",
     },
     subCategory: {
-        type: Schema.Types.ObjectId,
+        type: mongoose_1.Schema.Types.ObjectId,
         ref: "SubCategory",
     },
     order: {
@@ -29,4 +32,5 @@ const topicSchema = new Schema({
 }, {
     timestamps: true,
 });
-export const Topic = model("Topic", topicSchema);
+exports.Topic = (0, mongoose_1.model)("Topic", topicSchema);
+//# sourceMappingURL=topic.js.map

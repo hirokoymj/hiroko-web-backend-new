@@ -1,29 +1,11 @@
 import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
-import dotEnv from 'dotenv';
-
-import { connection } from './database/util/index.js';
-import { typeDefs } from './typeDefs/index.js';
-import { WeatherAPI } from './datasources/weather-api.js';
-import { categoryResolvers } from './resolvers/category.js';
-import { subCategoryResolvers } from './resolvers/subCategory.js';
-import { topicResolvers } from './resolvers/topic.js';
-import { dateScalarResolver } from './resolvers/dateScaler.js';
-import { weatherResolvers } from './resolvers/weather.js';
-import { cityResolvers } from './resolvers/city.js';
-
-dotEnv.config();
+import { connection } from './database/util/dbConnection';
+import { typeDefs } from './typeDefs/schemas';
+import { resolvers } from './resolvers/resolvers';
+import { WeatherAPI } from './datasources/weather-api';
 
 connection();
-
-const resolvers = [
-  dateScalarResolver,
-  categoryResolvers,
-  subCategoryResolvers,
-  topicResolvers,
-  weatherResolvers,
-  cityResolvers,
-];
 
 async function startApolloServer() {
   const server = new ApolloServer({ typeDefs, resolvers });

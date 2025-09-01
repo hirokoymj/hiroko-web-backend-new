@@ -1,5 +1,8 @@
-import { Schema, model } from "mongoose";
-const categorySchema = new Schema({
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Category = void 0;
+const mongoose_1 = require("mongoose");
+const categorySchema = new mongoose_1.Schema({
     name: {
         type: String,
         required: true,
@@ -15,4 +18,5 @@ const categorySchema = new Schema({
 }, {
     timestamps: true,
 });
-export const Category = model("Category", categorySchema);
+exports.Category = (0, mongoose_1.model)("Category", categorySchema);
+//# sourceMappingURL=category.js.map

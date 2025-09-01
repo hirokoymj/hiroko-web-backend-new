@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
-import { Category } from '../database/models/category.js';
-import { SubCategory } from '../database/models/subCategory.js';
+import { Category } from '../database/models/category';
+import { SubCategory } from '../database/models/subCategory';
 
 export const subCategoryResolvers = {
   Query: {
@@ -65,8 +65,8 @@ export const subCategoryResolvers = {
   },
   // Resolver chain
   SubCategory: {
-    category: async (parent) => {
-      const category = await Category.findById(parent.category);
+    category: async ({ category: { _id } }) => {
+      const category = await Category.findById(_id);
       return category;
     },
   },
