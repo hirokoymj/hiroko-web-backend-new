@@ -1,11 +1,14 @@
-import { City } from "../database/models/city.js";
-export const cityResolvers = {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.cityResolvers = void 0;
+const city_js_1 = require("../database/models/city.js");
+exports.cityResolvers = {
     Query: {
         cities: async (_, { city }) => {
-            console.log("cities");
+            console.log('cities');
             try {
-                const result = await City.find({
-                    name: new RegExp(city, "i"),
+                const result = await city_js_1.City.find({
+                    name: new RegExp(city, 'i'),
                 });
                 return result;
             }
@@ -16,3 +19,4 @@ export const cityResolvers = {
         },
     },
 };
+//# sourceMappingURL=city.js.map

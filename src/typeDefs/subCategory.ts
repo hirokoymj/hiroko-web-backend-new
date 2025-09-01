@@ -36,7 +36,7 @@ export const subCategoryTypeDefs = gql`
     name: String!
     order: Int
     category: Category
-    createdAt: Date!
-    updatedAt: Date!
+    createdAt: Date
+    updatedAt: Date
   }
 `;

@@ -1,11 +1,14 @@
-import { Schema, model } from "mongoose";
-const subCategorySchema = new Schema({
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.SubCategory = void 0;
+const mongoose_1 = require("mongoose");
+const subCategorySchema = new mongoose_1.Schema({
     name: {
         type: String,
         required: true,
     },
     category: {
-        type: Schema.Types.ObjectId,
+        type: mongoose_1.Schema.Types.ObjectId,
         ref: "Category",
     },
     order: {
@@ -15,4 +18,5 @@ const subCategorySchema = new Schema({
 }, {
     timestamps: true,
 });
-export const SubCategory = model("SubCategory", subCategorySchema);
+exports.SubCategory = (0, mongoose_1.model)("SubCategory", subCategorySchema);
+//# sourceMappingURL=subCategory.js.map

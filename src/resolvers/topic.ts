@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
-import { Category } from '../database/models/category.js';
-import { SubCategory } from '../database/models/subCategory.js';
-import { Topic } from '../database/models/topic.js';
+import { Category } from '../database/models/category';
+import { SubCategory } from '../database/models/subCategory';
+import { Topic } from '../database/models/topic';
 
 export const topicResolvers = {
   Query: {
@@ -76,12 +76,12 @@ export const topicResolvers = {
   },
   // Resolver chain
   Topic: {
-    category: async (parent) => {
-      const category = await Category.findById(parent.category);
+    category: async ({ category: { _id } }) => {
+      const category = await Category.findById(_id);
       return category;
     },
-    subCategory: async (parent) => {
-      const subCategory = await SubCategory.findById(parent.subCategory);
+    subCategory: async ({ subCategory: { _id } }) => {
+      const subCategory = await SubCategory.findById(_id);
       return subCategory;
     },
   },

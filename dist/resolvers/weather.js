@@ -1,4 +1,7 @@
-export const weatherResolvers = {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.weatherResolvers = void 0;
+exports.weatherResolvers = {
     Query: {
         currentWeatherByCity: async (_, { city, unit = "metric" }, { dataSources }) => {
             return dataSources.weatherAPI.getCurrentWeatherByCity(city, unit);
@@ -8,3 +11,4 @@ export const weatherResolvers = {
         },
     },
 };
+//# sourceMappingURL=weather.js.map

@@ -5,6 +5,9 @@ export const categoryTypeDefs = gql`
     categories: [Category!]
     categoryAll(limit: Int, skip: Int): PaginatedCategories
     categoryById(id: ID!): Category!
+    numberSix: Int!
+    numberSeven: Int!
+    numberOne: Int!
   }
   type PaginatedCategories {
     categories: [Category!]!
@@ -21,8 +24,8 @@ export const categoryTypeDefs = gql`
     name: String!
     abbr: String!
     order: Int
-    createdAt: Date!
-    updatedAt: Date!
+    createdAt: Date
+    updatedAt: Date
   }
 
   input updateCategoryInput {

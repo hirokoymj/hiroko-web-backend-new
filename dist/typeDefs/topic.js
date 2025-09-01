@@ -1,5 +1,8 @@
-import { gql } from 'graphql-tag';
-export const topicTypeDefs = gql `
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.topicTypeDefs = void 0;
+const graphql_tag_1 = require("graphql-tag");
+exports.topicTypeDefs = (0, graphql_tag_1.gql) `
   extend type Query {
     topics: [Topic!]
     topicAll(limit: Int, skip: Int): PaginatedTopics
@@ -46,3 +49,4 @@ export const topicTypeDefs = gql `
     updatedAt: Date
   }
 `;
+//# sourceMappingURL=topic.js.map

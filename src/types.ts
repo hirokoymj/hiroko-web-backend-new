@@ -78,6 +78,7 @@ export type Forecast = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  _?: Maybe<Scalars['String']['output']>;
   createCategory?: Maybe<Category>;
   createSubCategory?: Maybe<SubCategory>;
   createTopic?: Maybe<Topic>;
@@ -157,6 +158,7 @@ export type PaginatedTopics = {
 
 export type Query = {
   __typename?: 'Query';
+  _?: Maybe<Scalars['String']['output']>;
   categories?: Maybe<Array<Category>>;
   categoryAll?: Maybe<PaginatedCategories>;
   categoryById: Category;
@@ -523,6 +525,7 @@ export type ForecastResolvers<ContextType = any, ParentType extends ResolversPar
 };
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+  _?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   createCategory?: Resolver<Maybe<ResolversTypes['Category']>, ParentType, ContextType, Partial<MutationCreateCategoryArgs>>;
   createSubCategory?: Resolver<Maybe<ResolversTypes['SubCategory']>, ParentType, ContextType, Partial<MutationCreateSubCategoryArgs>>;
   createTopic?: Resolver<Maybe<ResolversTypes['Topic']>, ParentType, ContextType, Partial<MutationCreateTopicArgs>>;
@@ -553,6 +556,7 @@ export type PaginatedTopicsResolvers<ContextType = any, ParentType extends Resol
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+  _?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   categories?: Resolver<Maybe<Array<ResolversTypes['Category']>>, ParentType, ContextType>;
   categoryAll?: Resolver<Maybe<ResolversTypes['PaginatedCategories']>, ParentType, ContextType, Partial<QueryCategoryAllArgs>>;
   categoryById?: Resolver<ResolversTypes['Category'], ParentType, ContextType, RequireFields<QueryCategoryByIdArgs, 'id'>>;

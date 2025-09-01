@@ -1,5 +1,8 @@
-import { gql } from 'graphql-tag';
-export const weatherTypeDefs = gql `
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.weatherTypeDefs = void 0;
+const graphql_tag_1 = require("graphql-tag");
+exports.weatherTypeDefs = (0, graphql_tag_1.gql) `
   extend type Query {
     currentWeatherByCity(city: String!, unit: Units): CurrentWeather
     dailyForecast(city: String!, unit: Units): DailyForecast
@@ -59,3 +62,4 @@ export const weatherTypeDefs = gql `
     forecastList: [Forecast]
   }
 `;
+//# sourceMappingURL=weather.js.map

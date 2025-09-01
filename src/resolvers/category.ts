@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { Category } from '../database/models/category.js';
+import { Category } from '../database/models/category';
 
 export const categoryResolvers = {
   Query: {
@@ -43,6 +43,15 @@ export const categoryResolvers = {
         console.log(error);
         throw error;
       }
+    },
+    numberSix: () => {
+      return 6;
+    },
+    numberSeven: () => {
+      return 7;
+    },
+    numberOne: () => {
+      return 1;
     },
   },
   Mutation: {

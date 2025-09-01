@@ -1,9 +1,14 @@
-import { gql } from 'graphql-tag';
-export const categoryTypeDefs = gql `
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.categoryTypeDefs = void 0;
+const graphql_tag_1 = require("graphql-tag");
+exports.categoryTypeDefs = (0, graphql_tag_1.gql) `
   extend type Query {
     categories: [Category!]
     categoryAll(limit: Int, skip: Int): PaginatedCategories
     categoryById(id: ID!): Category!
+    numberSix: Int!
+    numberSeven: Int!
   }
   type PaginatedCategories {
     categories: [Category!]!
@@ -36,3 +41,4 @@ export const categoryTypeDefs = gql `
     order: Int
   }
 `;
+//# sourceMappingURL=category.js.map

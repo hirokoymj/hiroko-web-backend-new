@@ -1,12 +1,18 @@
-import mongoose from 'mongoose';
-import { Category } from '../database/models/category.js';
-import { SubCategory } from '../database/models/subCategory.js';
-import { Topic } from '../database/models/topic.js';
-export const topicResolvers = {
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.topicResolvers = void 0;
+const mongoose_1 = __importDefault(require("mongoose"));
+const category_js_1 = require("../database/models/category.js");
+const subCategory_js_1 = require("../database/models/subCategory.js");
+const topic_js_1 = require("../database/models/topic.js");
+exports.topicResolvers = {
     Query: {
         topics: async (_) => {
             try {
-                const topics = await Topic.find().sort({
+                const topics = await topic_js_1.Topic.find().sort({
                     category: 1,
                     subCategory: 1,
                 });
@@ -18,8 +24,8 @@ export const topicResolvers = {
         },
         topicAll: async (_, { limit, skip }) => {
             try {
-                const totalCount = await Topic.countDocuments({});
-                let query = Topic.find().sort({
+                const totalCount = await topic_js_1.Topic.countDocuments({});
+                let query = topic_js_1.Topic.find().sort({
                     createdAt: -1,
                     updatedAt: -1,
                     category: 1,
@@ -44,8 +50,8 @@ export const topicResolvers = {
         },
         topicById: async (_, { id }) => {
             try {
-                const _id = new mongoose.Types.ObjectId(id);
-                const topic = await Topic.findById({ _id });
+                const _id = new mongoose_1.default.Types.ObjectId(id);
+                const topic = await topic_js_1.Topic.findById({ _id });
                 return topic;
             }
             catch (error) {
@@ -54,15 +60,15 @@ export const topicResolvers = {
             }
         },
         topicByCategory: async (_, { categoryId }) => {
-            const topicArray = await Topic.find({ category: categoryId }).sort({
+            const topicArray = await topic_js_1.Topic.find({ category: categoryId }).sort({
                 order: 1,
             });
             return topicArray;
         },
         topicByCategoryAbbr: async (_, { abbr }) => {
             try {
-                const { id } = await Category.findOne({ abbr });
-                const topics = await Topic.find({ category: id }).sort({
+                const { id } = await category_js_1.Category.findOne({ abbr });
+                const topics = await topic_js_1.Topic.find({ category: id }).sort({
                     order: 1,
                 });
                 return topics;
@@ -72,21 +78,20 @@ export const topicResolvers = {
             }
         },
     },
-    // Resolver chain
     Topic: {
         category: async (parent) => {
-            const category = await Category.findById(parent.category);
+            const category = await category_js_1.Category.findById(parent.category);
             return category;
         },
         subCategory: async (parent) => {
-            const subCategory = await SubCategory.findById(parent.subCategory);
+            const subCategory = await subCategory_js_1.SubCategory.findById(parent.subCategory);
             return subCategory;
         },
     },
     Mutation: {
         createTopic: async (_, { input }) => {
             try {
-                const topic = new Topic({ ...input });
+                const topic = new topic_js_1.Topic({ ...input });
                 const result = await topic.save();
                 return result;
             }
@@ -96,7 +101,7 @@ export const topicResolvers = {
         },
         deleteTopic: async (_, { id }) => {
             try {
-                const topic = await Topic.findByIdAndDelete(id);
+                const topic = await topic_js_1.Topic.findByIdAndDelete(id);
                 return topic;
             }
             catch (error) {
@@ -105,7 +110,7 @@ export const topicResolvers = {
         },
         updateTopic: async (_, { id, input }) => {
             try {
-                const topic = await Topic.findByIdAndUpdate(id, { ...input }, { new: true });
+                const topic = await topic_js_1.Topic.findByIdAndUpdate(id, { ...input }, { new: true });
                 return topic;
             }
             catch (error) {
@@ -115,3 +120,4 @@ export const topicResolvers = {
         },
     },
 };
+//# sourceMappingURL=topic.js.map
